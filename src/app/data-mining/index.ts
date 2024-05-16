@@ -7,8 +7,6 @@ export async function getVideos({searchTerm, maxResults}: {searchTerm: string, m
 
     const videoIds = await getVideoIdsFromSearch({ searchTerm, maxResults })
 
-    console.log("Found", videoIds.length, "videos")
-
     const videoDetails = await getVideoDetails({videoIds, searchTerm})
 
     const end = new Date().getTime()

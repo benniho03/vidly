@@ -4,7 +4,7 @@ import { db } from "~/server/db"
 export async function GET() {
 
     const result = await getVideos({
-        maxResults: 3,
+        maxResults: 50,
         searchTerm: "minecraft"
     })
 
