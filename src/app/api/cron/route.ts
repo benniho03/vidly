@@ -1,7 +1,7 @@
 import { getVideos } from "~/app/data-mining"
 import { db } from "~/server/db"
 
-export async function POST() {
+export async function GET() {
 
     console.log("Cron job started")
 
