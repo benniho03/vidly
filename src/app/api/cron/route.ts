@@ -3,14 +3,14 @@ import { db } from "~/server/db"
 
 export async function GET() {
 
-    console.log("Cron job started")
+    console.warn("Cron job started")
 
     const result = await getVideos({
         maxResults: 50,
         searchTerm: "minecraft"
     })
 
-    console.log("Cron job got videos")
+    console.warn("Cron job got videos")
 
     if (result.body.videos.length === 0) {
         return new Response("No videos found", { status: 404 })
@@ -19,6 +19,8 @@ export async function GET() {
     const { count } = await db.videos.createMany({
         data: result.body.videos,
     })
+
+    console.warn("Created " + count + " videos")
 
     return new Response(`Found ${count} videos`, {
         status: 200,
