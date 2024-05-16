@@ -8,8 +8,8 @@ export async function GET() {
     try {
 
         const result = await getVideos({
-            maxResults: 50,
-            searchTerm: "minecraft"
+            maxResults: 200,
+            searchTerm: "Fortnite"
         })
         
         console.warn("Cron job got videos")
