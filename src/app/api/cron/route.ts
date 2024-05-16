@@ -22,7 +22,7 @@ export async function GET() {
 
     console.warn("Created " + count + " videos")
 
-    return new Response(`Found ${count} videos`, {
+    return new Response(JSON.stringify(result), {
         status: 200,
         headers: {
             "Content-Type": "application/json",
