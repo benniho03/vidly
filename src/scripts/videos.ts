@@ -1,5 +1,5 @@
-import { getVideoIdsFromSearch } from "./youtube/search"
-import { getVideoDetails } from "./youtube/videos"
+import { getVideoIdsFromSearch } from "../app/data-mining/youtube/search"
+import { getVideoDetails } from "../app/data-mining/youtube/videos"
 
 export async function getVideos({searchTerm, maxResults}: {searchTerm: string, maxResults: number}) {
 

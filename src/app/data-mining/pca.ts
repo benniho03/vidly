@@ -1,5 +1,5 @@
 import { PCA } from "ml-pca"
-import { getVideos } from ".";
+import { getVideos } from "../../scripts/videos";
 import { db } from "~/server/db";
 
 const videos = await db.videos.findMany({ take: 50 })

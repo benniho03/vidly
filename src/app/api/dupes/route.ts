@@ -1,8 +1,12 @@
-import { getVideos } from "~/app/data-mining"
 import { removeDuplicateVideoIds } from "~/scripts/remove-duplicates"
 import { db } from "~/server/db"
+import { authenticateCronJob } from "../cron/auth"
+import { NextRequest } from "next/server"
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+
+    const { authenticated } = authenticateCronJob(req)
+    if(!authenticated) return new Response("Unauthorized", { status: 401 })
 
     try {
 

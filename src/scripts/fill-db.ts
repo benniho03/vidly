@@ -1,5 +1,5 @@
 import { db } from "~/server/db";
-import { getVideos } from ".";
+import { getVideos } from "./videos";
 
 const videos = await getVideos({
     searchTerm: "flora",
