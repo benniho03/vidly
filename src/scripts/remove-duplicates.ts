@@ -1,6 +1,6 @@
 import { db } from '~/server/db';
 
-async function removeDuplicateVideoIds() {
+export async function removeDuplicateVideoIds() {
   try {
     // Schritt 1: Finde alle videoIds, die mehr als einmal vorkommen
     const duplicateVideoIds = await db.videos.groupBy({
@@ -16,7 +16,7 @@ async function removeDuplicateVideoIds() {
         }
       }
     });
-console.log("Gefundene Duplicates: ", duplicateVideoIds.length)
+    console.log("Found Duplicates: ", duplicateVideoIds.length)
     // Schritt 2: Iteriere über jede duplicateVideoId und lösche die Duplikate
     for (const duplicate of duplicateVideoIds) {
       const { videoId } = duplicate;
@@ -28,13 +28,19 @@ console.log("Gefundene Duplicates: ", duplicateVideoIds.length)
       // Behalte das erste Vorkommen und lösche die restlichen
       for (let i = 1; i < videos.length; i++) {
         await db.videos.delete({
-          where: { id: videos[i].id }
+          where: { id: videos[i]?.id }
         });
       }
+
     }
+    return { count: duplicateVideoIds.length };
   } catch (error) {
     console.error(error);
-  } 
+    return {
+      error: error,
+      count: -1
+    }
+  }
 }
 
 await removeDuplicateVideoIds();
