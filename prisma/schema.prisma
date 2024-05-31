@@ -29,5 +29,19 @@ model videos {
   tags            String[]
   topicCategories String[]
   language        String?
+  categoryid      Int?
   query           String?
+}
+
+model searchterms {
+  id        String   @id @default(cuid())
+  query     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model helper {
+  id      String @id @default(cuid())
+  videoid String
+  query   String
 }

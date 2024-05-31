@@ -25,6 +25,6 @@ export async function getVideos({searchTerm, maxResults}: {searchTerm: string, m
 
 
 await getVideos({
-    searchTerm: "minecraft",
+    searchTerm: "music",
     maxResults: 3,
 })

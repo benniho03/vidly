@@ -2,8 +2,8 @@ import { db } from "~/server/db";
 import { getVideos } from "./videos";
 
 const videos = await getVideos({
-    searchTerm: "flora",
-    maxResults: 1000
+    searchTerm: "garden tips",
+    maxResults: 100
 })
 
 await db.videos.createMany({

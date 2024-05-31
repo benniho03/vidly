@@ -1,13 +1,33 @@
 import { iso8601ToSeconds } from "../helpers/duration-parser"
+import fs from "fs/promises"
 
+export type Video = {
+    id?: string
+    videoId: string
+    title: string
+    thumbnail: string
+    description: string
+    channel: string
+    likeCount: number
+    commentCount: number
+    viewCount: number
+    duration: number
+    publishedAt: string
+    caption: string
+    tags: string[]
+    categoryid: number
+    topicCategories: string[]
+    language: string
+    query: string
+}
 
 export async function getVideoDetails({
-     videoIds, searchTerm 
-    }: {
-         videoIds: string[] | string, searchTerm: string 
-        }): Promise<any[]> {
+    videoIds, searchTerm
+}: {
+    videoIds: string[] | string, searchTerm: string
+}): Promise<Video[]> {
 
-    const videoDetails = []
+    const videoDetails: Video[] = []
 
     for (let i = 0; i < Math.ceil(videoIds.length / 50); i++) {
 
@@ -32,11 +52,12 @@ export async function getVideoDetails({
         if (!data.items) throw new Error("No videos found")
 
         videoDetails.push(...data.items.map((item: any) => ({
-            id: item.id,
+            videoId: item.id ?? null,
             title: item.snippet.title ?? null,
             thumbnail: item.snippet.thumbnails.default.url ?? null,
             description: item.snippet.description ?? null,
             channel: item.snippet.channelTitle ?? null,
+            categoryid: Number(item.snippet.categoryId) ?? null,
             likeCount: Number(item.statistics.likeCount) ?? null,
             commentCount: Number(item.statistics.commentCount) ?? null,
             viewCount: Number(item.statistics.viewCount) ?? null,
@@ -50,12 +71,5 @@ export async function getVideoDetails({
         })))
     }
 
-    return videoDetails.map(video => {
-        const videoId = video.id
-        delete video.id
-        return {
-            videoId,
-            ...video
-        }
-    })
+    return videoDetails as Video[]
 }
