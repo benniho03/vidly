@@ -32,8 +32,10 @@ export async function GET(req: NextRequest) {
     ] as const
 
     const { authenticated } = authenticateCronJob(req)
-    if(!authenticated) return new Response("Unauthorized", { status: 401 })
-
+    if (!authenticated) {
+        console.error("Received unauthorized request")
+        return new Response("Unauthorized", { status: 401 })
+    }
     try {
 
         const now = new Date()
