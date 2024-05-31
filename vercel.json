@@ -1,12 +1,8 @@
 {
-    "crons": [
-      {
-        "path": "/api/cron",
-        "schedule": "0 20 * * *"
-      },
-      {
-        "path": "/api/dupes",
-        "schedule": "0 21 * * *"
-      }
-    ]
-  }
+  "crons": [
+    {
+      "path": "/api/cron",
+      "schedule": "0 20 * * *"
+    }
+  ]
+}

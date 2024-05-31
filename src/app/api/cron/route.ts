@@ -2,10 +2,12 @@ import { NextRequest } from "next/server"
 import { getVideos } from "~/scripts/videos"
 import { db } from "~/server/db"
 import { authenticateCronJob } from "./auth"
+import { Video } from "~/app/data-mining/youtube/videos"
 
 export async function GET(req: NextRequest) {
 
     const keywords = [
+        "garden",
         "gardening",
         "flowers",
         "greenhouse",
@@ -23,12 +25,55 @@ export async function GET(req: NextRequest) {
         "garden pests",
         "weeds",
         "plant disease",
-        "pruning",
-        "propagation",
+        "plant pruning",
+        "plant propagation",
         "gardening tools",
         "gardening equipment",
-        "irrigation",
         "watering",
+        "Weed control",
+        "Gardening tips",
+        "Garden life hacks",
+        "Garden tutorials",
+        "Repotting plants",
+        "Taking plant cuttings",
+        "Garden care",
+        "Garden ideas",
+        "Garden projects",
+        "DIY garden",
+        "Pruning roses",
+        "Creating raised beds",
+        "Herb garden",
+        "Harvesting herbs",
+        "Orchard",
+        "Planting fruit trees",
+        "Planting berries",
+        "Winter-hardy plants",
+        "Low-maintenance plants",
+        "Natural garden",
+        "Mowing the lawn",
+        "Seeding the lawn",
+        "Laying sod",
+        "Fertilizing the lawn",
+        "Gardening for beginners",
+        "Vertical garden",
+        "Planting a balcony garden",
+        "Creating a garden pond",
+        "Pond maintenance",
+        "Creating a lawn",
+        "Pruning trees",
+        "Pruning shrubs",
+        "Child-friendly garden",
+        "Building a birdhouse",
+        "Insect hotel",
+        "Wildlife in the garden",
+        "Frost protection in the garden",
+        "Summer flowers",
+        "Spring flowers",
+        "Winter-hardy plants",
+        "Garden furniture",
+        "Garden lighting",
+        "Garden decoration",
+        "Taking cuttings",
     ] as const
 
     const { authenticated } = authenticateCronJob(req)
@@ -36,29 +81,39 @@ export async function GET(req: NextRequest) {
         console.error("Received unauthorized request")
         return new Response("Unauthorized", { status: 401 })
     }
+
     try {
 
         const now = new Date()
-        const dateOfMonth = now.getDate()
+        const dayOfMonth = now.getDate()
+        const month = now.getMonth()
 
-        const result = await getVideos({
-            maxResults: 4000,
-            searchTerm: keywords[dateOfMonth % keywords.length] ?? keywords[0],
-        })
+        let results: Video[] = []
+
+        for (let i = 0; i < 4; i++) {
+            const index = (dayOfMonth - 1) * 4 + i % keywords.length + ((month - 6) * 31)
+            const result = await getVideos({
+                maxResults: 1000,
+                searchTerm: keywords[index] ?? keywords[0],
+            })
+
+            results.push(...result.body.videos)
+
+        }
 
         console.warn("Cron job got videos")
 
-        if (result.body.videos.length === 0) {
+        if (results.length === 0) {
             return new Response("No videos found", { status: 404 })
         }
 
         const { count } = await db.videos.createMany({
-            data: result.body.videos,
+            data: results,
         })
 
         console.warn("Created " + count + " videos")
 
-        return new Response(JSON.stringify(result), {
+        return new Response(JSON.stringify(results), {
             status: 200,
             headers: {
                 "Content-Type": "application/json",
@@ -66,6 +121,6 @@ export async function GET(req: NextRequest) {
         })
     } catch (error) {
         console.error(error)
-        return new Response(JSON.stringify(error), { status: 500 })
+        return new Response(JSON.stringify(error))
     }
 }
