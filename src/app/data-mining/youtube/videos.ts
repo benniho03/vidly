@@ -2,8 +2,8 @@ import { iso8601ToSeconds } from "../helpers/duration-parser"
 import fs from "fs/promises"
 
 export type Video = {
-    id?: string
-    videoId: string
+    id: string
+    videoId: string | null
     title: string
     thumbnail: string
     description: string
