@@ -24,7 +24,9 @@ export async function getVideos({ searchTerm, maxResults }: { searchTerm: string
 }
 
 
-await getVideos({
-    searchTerm: "music",
-    maxResults: 3,
-})
+console.log(
+    await getVideos({
+        searchTerm: "music",
+        maxResults: 3,
+    })
+)

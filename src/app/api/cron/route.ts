@@ -101,7 +101,7 @@ export async function GET(req: NextRequest) {
 
         }
 
-        console.warn("Cron job got videos")
+        console.log("Found " + results.length + " videos")
 
         if (results.length === 0) {
             return new Response("No videos found", { status: 404 })
@@ -120,7 +120,7 @@ export async function GET(req: NextRequest) {
             },
         })
     } catch (error) {
-        console.error(error)
-        return new Response(JSON.stringify(error))
+        console.log(error)
+        return new Response("An Error occured", { status: 200 })
     }
 }
