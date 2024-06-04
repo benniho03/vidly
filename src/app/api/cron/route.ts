@@ -76,22 +76,20 @@ export async function GET(req: NextRequest) {
         "Taking cuttings",
     ] as const
 
-    const { authenticated } = authenticateCronJob(req)
-    if (!authenticated) {
-        console.error("Received unauthorized request")
-        return new Response("Unauthorized", { status: 401 })
-    }
 
     try {
 
         const now = new Date()
-        const dayOfMonth = now.getDate()
-        const month = now.getMonth()
 
+        const { authenticated } = authenticateCronJob(req)
+        if (!authenticated) {
+            console.error("Received unauthorized request")
+            return new Response("Unauthorized", { status: 401 })
+        }
         let results: Video[] = []
 
         for (let i = 0; i < 4; i++) {
-            const index = (dayOfMonth - 1) * 4 + i % keywords.length + ((month - 6) * 31)
+            const index = ((now.getDate() - 1) * 4) % keywords.length
             const result = await getVideos({
                 maxResults: 1000,
                 searchTerm: keywords[index] ?? keywords[0],
