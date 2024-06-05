@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import r2_score
 from connect import get_all_videos
 
+from textBlob import add_sentiment_analysis_columns
 
 def preprocess_data(videos):
     # Strings aus DB in numerische Werte umwandeln
@@ -14,6 +15,8 @@ def preprocess_data(videos):
     videos['des_length'] = videos['description'].apply(len)
     videos['des_word_count'] = videos['description'].apply(lambda x: len(x.split()))
     videos['caption'] = videos['caption'].apply(lambda x: 0 if len(x) == 0 else 1)
+    #textBlob vorbereitung
+    videos = add_sentiment_analysis_columns(videos) 
     # unbrauchbare Spalten entfernen
     videos = videos.drop(columns=['id', 'videoId', 'title', 'thumbnail', 'description', 'channel', 'publishedAt', 'tags', 'topicCategories', 'language', 'query', 'createdat', 'updatedat', 'categoryid'])
     # Spalten mit Null entfernen
