@@ -1,11 +1,11 @@
 import psycopg2
-from config import load_config
+import pandas as pd
 
 def connect():
     """ Connect to the PostgreSQL database server """
     try:
         # connecting to the PostgreSQL server
-        with psycopg2.connect("postgresql://gruppe2:on21-6:d2@64.226.66.241:25060/gruppe2") as conn:
+        with psycopg2.connect("postgresql://gruppe2:on21-6:d2@db-postgresql-fra1-94996-do-user-6859634-0.c.db.ondigitalocean.com:25060/gruppe2") as conn:
             print('Connected to the PostgreSQL server.')
             return conn
     except (psycopg2.DatabaseError, Exception) as error:
@@ -15,40 +15,27 @@ def getAllVideos():
     try:
         db = connect()
         cur = db.cursor()
+
+        # SQL-Abfrage ausführen
         cur.execute("SELECT * FROM videos")
         videos = cur.fetchall()
-        # map the videos to a dictionary
-        videos_dict = []
-        for video in videos:
-            videos_dict.append({
-                'id': video[0],
-                'videoId': video[1],
-                'title': video[2],
-                'thumbnail': video[4],
-                'description': video[5],
-                'channel': video[6],
-                'likeCount': video[7],
-                'commentCount': video[8],
-                'viewCount': video[9],
-                'duration': video[10],
-                'publishedAt': video[11],
-                'caption': video[12],
-                'tags': video[13],
-                'topicCategories': video[14],
-                'language': video[15],
-                'query': video[16]
-            })
-        return videos_dict
+
+        # Spaltennamen abrufen
+        column_names = [desc[0] for desc in cur.description]
+
+        # Daten in ein DataFrame laden
+        df_videos = pd.DataFrame(videos, columns=column_names)
+        return df_videos
 
     except Exception as e:
         print(e)
     finally:
         if db is not None:
+            cur.close()
             db.close()
             print('Database connection closed.')
 
 
-
 if __name__ == '__main__':
     videos = getAllVideos()
-    print(videos[0])
+    print(videos)
