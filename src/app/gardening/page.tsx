@@ -3,6 +3,7 @@ import { AmountOfVideosByCategory } from "./numberVideosByCategory";
 import { Video } from "../data-mining/youtube/videos";
 import { ViewsByCategory } from "./viewsByCategory";
 import { WeekDayByViews } from "./weekDaybyViews";
+import { ViewsByTagsCount } from "./viewsByTagsCount";
 
 export default async function Gardening() {
 
@@ -20,6 +21,10 @@ export default async function Gardening() {
             }))} /> */}
             <WeekDayByViews videos={videos.map(v => ({
                 published: v.publishedAt,
+                viewCount: v.viewCount
+            }))} />
+            <ViewsByTagsCount videos={videos.map(v => ({
+                tagsCount: v.tags.length,
                 viewCount: v.viewCount
             }))} />
         </div>
