@@ -11,7 +11,7 @@ def connect():
     except (psycopg2.DatabaseError, Exception) as error:
         print(error)
 
-def getAllVideos():
+def get_all_videos():
     try:
         db = connect()
         cur = db.cursor()
@@ -37,5 +37,5 @@ def getAllVideos():
 
 
 if __name__ == '__main__':
-    videos = getAllVideos()
+    videos = get_all_videos()
     print(videos)
