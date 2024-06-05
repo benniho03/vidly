@@ -13,6 +13,27 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model gaming {
+  id              String    @id @default(cuid())
+  videoId         String?
+  title           String?
+  thumbnail       String?
+  description     String?
+  channel         String?
+  likeCount       Int?
+  commentCount    Int?
+  viewCount       Int?
+  duration        Int?
+  publishedAt     DateTime?
+  caption         String?
+  tags            String[]
+  topicCategories String[]
+  language        String?
+  categoryid      Int?
+  createdat       DateTime? @default(now())
+  updatedat       DateTime? @updatedAt
+}
+
 model videos {
   id              String    @id @default(cuid())
   videoId         String?
@@ -56,6 +77,11 @@ model videos_v2 {
 model searchterms {
   id    String @id @default(cuid())
   query String @unique
+}
+
+model pagetoken {
+  pagetoken String   @id
+  createdat DateTime @default(now())
 }
 
 model searchterm_helper {

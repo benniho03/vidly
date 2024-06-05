@@ -2,7 +2,7 @@ export async function getVideoIdsFromSearch({ searchTerm, maxResults }: { search
 
     const videoIds: string[] = []
     let nextPageToken: string | undefined;
-    
+
     for (let i = 0; i < Math.ceil(maxResults / 50); i++) {
 
         const params = new URLSearchParams({
