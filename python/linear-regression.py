@@ -4,6 +4,7 @@ from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 from sklearn.metrics import r2_score
 from connect import getAllVideos
+from textBlob import add_sentiment_analysis_columns
 
 def linearRegression(videos):
     # Strings in numerische Werte umwandeln
@@ -12,6 +13,8 @@ def linearRegression(videos):
     videos['des_length'] = videos['description'].apply(len)
     videos['des_word_count'] = videos['description'].apply(lambda x: len(x.split()))
     videos['caption'] = videos['caption'].apply(lambda x: 0 if len(x) == 0 else 1)
+    #textBlob vorbereitung
+    videos = add_sentiment_analysis_columns(videos) 
     # unbrauchbare Spalten entfernen
     videos = videos.drop(columns=['id', 'videoId', 'title', 'thumbnail', 'description', 'channel', 'publishedAt', 'tags', 'topicCategories', 'language', 'query', 'createdat', 'updatedat', 'categoryid'])
     # Spalten mit Null entfernen
@@ -20,7 +23,7 @@ def linearRegression(videos):
     # Multiple Lineare Regression
     X = videos.drop(columns="viewCount")
     y = videos['viewCount']
-
+    print(X)
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 0)
     lr = LinearRegression()
 
