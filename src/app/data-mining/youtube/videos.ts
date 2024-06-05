@@ -12,7 +12,7 @@ export type Video = {
     commentCount: number
     viewCount: number
     duration: number
-    publishedAt: string
+    publishedAt: string | Date
     caption: string
     tags: string[]
     categoryid: number

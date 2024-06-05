@@ -9,14 +9,22 @@ export async function removeDuplicateVideoIds() {
         videoId: true
       },
       having: {
-        videoId: {
-          _count: {
-            gt: 1
+        AND: {
+          videoId: {
+            _count: {
+              gt: 1
+            }
+          },
+          query: {
+            _count: {
+              gt: 1
+            }
           }
         }
       }
     });
     console.log("Found Duplicates: ", duplicateVideoIds.length)
+
     // Schritt 2: Iteriere über jede duplicateVideoId und lösche die Duplikate
     for (const duplicate of duplicateVideoIds) {
       const { videoId } = duplicate;

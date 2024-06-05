@@ -33,15 +33,34 @@ model videos {
   query           String?
 }
 
-model searchterms {
-  id        String   @id @default(cuid())
-  query     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+model videos_v2 {
+  id              String    @id @default(cuid())
+  videoId         String?
+  title           String?
+  thumbnail       String?
+  description     String?
+  channel         String?
+  likeCount       Int?
+  commentCount    Int?
+  viewCount       Int?
+  duration        Int?
+  publishedAt     DateTime?
+  caption         String?
+  tags            String[]
+  topicCategories String[]
+  language        String?
+  categoryid      Int?
+  query           String?
 }
 
-model helper {
-  id      String @id @default(cuid())
-  videoid String
+model searchterms {
+  id    String @id @default(cuid())
+  query String @unique
+}
+
+model searchterm_helper {
+  videoId String
   query   String
+
+  @@id([videoId, query])
 }
