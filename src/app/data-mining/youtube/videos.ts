@@ -22,9 +22,9 @@ export type Video = {
 }
 
 export async function getVideoDetails({
-    videoIds, searchTerm
+    videoIds, searchTerm, newAPIToken = false
 }: {
-    videoIds: string[] | string, searchTerm: string
+    videoIds: string[] | string, searchTerm: string, newAPIToken?: boolean
 }): Promise<Video[]> {
 
     const videoDetails: Video[] = []
@@ -36,7 +36,9 @@ export async function getVideoDetails({
         const params = new URLSearchParams({
             part: "snippet,statistics,contentDetails,topicDetails",
             id: Array.isArray(chunk) ? chunk.join(",") : chunk,
-            key: process.env.API_KEY as string,
+            key: newAPIToken ?
+                process.env.API_KEY_NEW as string :
+                process.env.API_KEY as string,
         })
 
         const response = await fetch("https://www.googleapis.com/youtube/v3/videos?" + params)
