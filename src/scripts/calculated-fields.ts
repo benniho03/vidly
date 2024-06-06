@@ -73,6 +73,6 @@ function getCommentsPerViewRate(video: Video) {
 }
 
 function getIncludesTitleEmoji(video: Video) {
-    const text = "hallo"
+    const text = "hallo🚒🚝✈🗼🚽🔥"
     console.log([...text].some(char => char.charCodeAt(0) > 127))
 }
