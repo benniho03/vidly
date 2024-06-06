@@ -1,7 +1,5 @@
+import { useQueryClient } from "@tanstack/react-query"
+
 export default function ResearchPage() {
-    return <div>
-        <form action={ }>
-            <input type="text" />
-        </form>
-    </div>
+    const queryClient = useQueryClient();
 }
