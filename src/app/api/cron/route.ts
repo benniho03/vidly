@@ -87,10 +87,11 @@ export async function GET(req: NextRequest) {
         let results: Video[] = []
 
         for (let i = 0; i < 4; i++) {
-            const index = ((now.getDate() - 1) * 4) % keywords.length
+            const index = ((now.getDate() - 1) * 4) % keywords.length + i
             const result = await getVideos({
-                maxResults: 1000,
+                maxResults: 1,
                 searchTerm: keywords[index] ?? keywords[0],
+                // searchTerm: "minecraft",
             })
 
             results.push(...result.body.videos)
@@ -103,10 +104,12 @@ export async function GET(req: NextRequest) {
         }
 
         await createVideosV2(results)
+        console.log("V2 created")
 
         const { count } = await db.videos.createMany({
             data: results,
         })
+        console.log("V1 created")
 
         console.warn("Created " + count + " videos")
 
@@ -150,11 +153,22 @@ export async function createVideosV2(videos: Video[]) {
             })
         }
 
-        await db.searchterm_helper.create({
-            data: {
+        await db.searchterm_helper.upsert({
+            where: {
+                AND: {
+                    query: video.query,
+                    videoId: video.videoId!,
+                },
+                videoId_query: {
+                    query: video.query,
+                    videoId: video.videoId!,
+                },
+            },
+            create: {
                 query: video.query,
                 videoId: video.videoId!,
-            }
+            },
+            update: {},
         })
     }
 }
