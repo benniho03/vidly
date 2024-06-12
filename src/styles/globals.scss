@@ -24,6 +24,7 @@ body {
     background: linear-gradient(to bottom,
             transparent,
             rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+    min-height: 500px;        
 }
 
 @layer utilities {
@@ -41,11 +42,12 @@ button{
     margin-top: 1.5rem;
 }
 
+
 .background {
     position: relative;
     padding-top: 2rem;
     padding-bottom: 2rem;
-    margin-bottom: 3rem;
+    margin-bottom: 12rem;
     .background-bg {
         bottom: 0;
         height: 100%;
@@ -58,5 +60,27 @@ button{
         width: 100vw;
         z-index: -1;
    
+    }
+}
+
+.pictures{
+    justify-content: space-between;
+    align-items: baseline;
+    position: relative;
+    bottom: -10rem;
+    margin-top: -4rem;
+
+    
+    .picture-one{
+        width: 35%;
+    }
+
+    .picture-two{
+        width: 50%;
+        height: 80%;
+
+        img{
+            object-fit: cover;
+        }
     }
 }
