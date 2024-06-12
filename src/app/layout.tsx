@@ -24,7 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
       </head>
-      <body className={inter.className}>
+      <body className={inter.className} >
         <nav className="bg-neutral-50 bg-opacity-80 border-neutral-50 dark:bg-neutral-50 bg-opacity-70">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -39,16 +39,16 @@ export default function RootLayout({
             <div className="hidden w-full md:block md:w-auto" id="navbar-default">
               <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border bg-neutral-50 rounded-lg bg-neutral-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-neutral-50 dark:border-gray-700">
                 <li>
-                  <a href="#" className="block py-2 px-3 text-neutral-950 rounded md:text-neutral-950 md:p-0 dark:text-neutral-950 md:dark:text-neutral-950">Home</a>
+                  <a href="#" className="block py-2 px-3 text-neutral-500 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-neutral-800 md:p-0 dark:text-neutral-500 md:dark:hover:text-neutral-800 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Home</a>
                 </li>
                 <li>
-                  <a href="/gardening" className="block py-2 px-3 text-neutral-500 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-neutral-400 md:p-0 dark:text-neutral-500 md:dark:hover:text-neutral-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Gardening</a>
+                  <a href="/gardening" className="block py-2 px-3 text-neutral-500 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-neutral-400 md:p-0 dark:text-neutral-500 md:dark:hover:text-neutral-800 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Gardening</a>
                 </li>
                 <li>
-                  <a href="#" className="block py-2 px-3 text-neutral-500 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-neutral-400 md:p-0 dark:text-neutral-500 md:dark:hover:text-neutral-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Research</a>
+                  <a href="/research" className="block py-2 px-3 text-neutral-500 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-neutral-400 md:p-0 dark:text-neutral-500 md:dark:hover:text-neutral-800 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Research</a>
                 </li>
                 <li>
-                  <a href="/ki-helper" className="block py-2 px-3 text-neutral-500 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-neutral-400 md:p-0 dark:text-neutral-500 md:dark:hover:text-neutral-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">KI-Helper</a>
+                  <a href="/ki-helper" className="block py-2 px-3 text-neutral-500 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-neutral-400 md:p-0 dark:text-neutral-500 md:dark:hover:text-neutral-800 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">KI-Helper</a>
                 </li>
               </ul>
             </div>
