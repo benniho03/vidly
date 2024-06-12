@@ -89,7 +89,7 @@ export async function GET(req: NextRequest) {
         for (let i = 0; i < 4; i++) {
             const index = ((now.getDate() - 1) * 4) % keywords.length + i
             const result = await getVideos({
-                maxResults: 1,
+                maxResults: 1000,
                 searchTerm: keywords[index] ?? keywords[0],
                 // searchTerm: "minecraft",
             })
@@ -113,7 +113,7 @@ export async function GET(req: NextRequest) {
 
         console.warn("Created " + count + " videos")
 
-        return new Response(JSON.stringify(results), {
+        return new Response(`Created ${count} videos`, {
             status: 200,
             headers: {
                 "Content-Type": "application/json",
