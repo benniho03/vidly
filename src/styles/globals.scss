@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "./gardening.scss";
+
+
+:root {
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --foreground-rgb: 255, 255, 255;
+        --background-start-rgb: 0, 0, 0;
+        --background-end-rgb: 0, 0, 0;
+    }
+}
+
+body {
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(to bottom,
+            transparent,
+            rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+}
+
+h1{
+    font-size: 5rem;
+    text-transform: uppercase;
+}
+
+button{
+    margin-top: 1.5rem;
+}
+
+.background {
+    position: relative;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    margin-bottom: 3rem;
+    .background-bg {
+        bottom: 0;
+        height: 100%;
+        left: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        position: absolute;
+        right: 50%;
+        top: 0;
+        width: 100vw;
+        z-index: -1;
+   
+    }
+}
