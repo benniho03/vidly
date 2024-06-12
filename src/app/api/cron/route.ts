@@ -4,6 +4,9 @@ import { db } from "~/server/db"
 import { authenticateCronJob } from "./auth"
 import { Video } from "~/app/data-mining/youtube/videos"
 
+export const maxDuration = 30
+export const dynamic = 'force-dynamic'
+
 export const keywords = [
     "garden",
     "gardening",
