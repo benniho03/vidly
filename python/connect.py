@@ -39,3 +39,27 @@ def get_all_videos():
 if __name__ == '__main__':
     videos = get_all_videos()
     print(videos)
+
+def get_videos_no_music():
+    try:
+        db = connect()
+        cur = db.cursor()
+
+        # SQL-Abfrage ausführen
+        cur.execute("SELECT * FROM videos WHERE NOT categoryid = 10")
+        videos = cur.fetchall()
+
+        # Spaltennamen abrufen
+        column_names = [desc[0] for desc in cur.description]
+
+        # Daten in ein DataFrame laden
+        df_videos = pd.DataFrame(videos, columns=column_names)
+        return df_videos
+
+    except Exception as e:
+        print(e)
+    finally:
+        if db is not None:
+            cur.close()
+            db.close()
+            print('Database connection closed.')
