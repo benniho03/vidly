@@ -1,25 +1,8 @@
+import { Prisma } from "@prisma/client"
 import { iso8601ToSeconds } from "../helpers/duration-parser"
 import fs from "fs/promises"
 
-export type Video = {
-    id: string
-    videoId: string | null
-    title: string
-    thumbnail: string
-    description: string
-    channel: string
-    likeCount: number
-    commentCount: number
-    viewCount: number
-    duration: number
-    publishedAt: string | Date
-    caption: string
-    tags: string[]
-    categoryid: number
-    topicCategories: string[]
-    language: string
-    query: string
-}
+export type Video = Prisma.videosGetPayload<{}>
 
 export async function getVideoDetails({
     videoIds, searchTerm, newAPIToken = false
