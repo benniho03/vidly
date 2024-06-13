@@ -16,7 +16,7 @@ export default async function Gardening() {
                 <img src="/assets/hero-gardening.jpg"/>
             </div>
             <div className="container mx-auto px-20">
-            <div className="background">
+            <div className="background mb-20">
                <div className="background-bg bg-lime-950"></div> 
             <h1>Gardening</h1>
             <p>Here you can find all the information you need to know about gardening.</p>
