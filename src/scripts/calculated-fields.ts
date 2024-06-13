@@ -4,25 +4,30 @@ import { db } from "~/server/db"
 await addCalculatedFields()
 
 export async function addCalculatedFields() {
-    const video = await db.videos.findFirst({
-        where: {
-            description: {
-                not: ""
+    const videos = await db.videos.findMany()
+    for (const video of videos) {
+        await db.videos.update({
+            where: {
+                id: video.id
+            },
+            data: {
+                titlecharlength: getTitleCharLength(video),
+                titlewordcount: getTitleWordCount(video),
+                descriptioncharlength: getDescriptionCharLength(video),
+                descriptionwordcount: getDescriptionWordCount(video),
+                publishedattime: getPublishedAtTime(video),
+                publishedatday: getPublishedAtDay(video),
+                likesperviewrate: getLikesPerViewRate(video),
+                commentsperviewrate: getCommentsPerViewRate(video),
+                includestitleemoji: getIncludesTitleEmoji(video).toString()
             }
-        }
-    })
+        })
+        console.log(getTitleCharLength(video))
+    }
+    console.log("finished")
     // let newVideo: VideoWithCalculatedfields = { ...video, titleCharLength: null };
     // newVideo = {...video, titleCharLength: getTitleCharLength(video)}
-    const titleCharLength = getTitleCharLength(video)
-    const titleWordCount = getTitleWordCount(video)
-    const descriptionCharLength = getDescriptionCharLength(video)
-    const descriptionWordCount = getDescriptionWordCount(video)
-    const publishedAtTime = getPublishedAtTime(video)
-    const publishedAtDay = getPublishedAtDay(video)
-    const likesPerViewRate = getLikesPerViewRate(video)
-    const commentsPerViewRate = getCommentsPerViewRate(video)
-    const includesTitleEmoji = getIncludesTitleEmoji(video)
-    console.log()
+
 }
 
 function getTitleCharLength(video: Video) {
@@ -73,6 +78,6 @@ function getCommentsPerViewRate(video: Video) {
 }
 
 function getIncludesTitleEmoji(video: Video) {
-    const text = "hallo🚒🚝✈🗼🚽🔥"
-    console.log([...text].some(char => char.charCodeAt(0) > 127))
+    const emojiRegex = /(\p{Emoji_Presentation}|\p{Emoji}\uFE0F|\p{Emoji_Modifier_Base}\p{Emoji_Modifier}?)/gu;
+    return emojiRegex.test(video.title)
 }
