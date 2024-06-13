@@ -1,13 +1,23 @@
 import pandas as pd
+from sklearn.decomposition import PCA
 
 def preprocess_data(videos):
     videos['publishedAt'] = pd.to_datetime(videos['publishedAt'])
     videos['month'] = videos['publishedAt'].dt.month
     videos['weekday'] = videos['publishedAt'].dt.weekday + 1
     videos['hour'] = videos['publishedAt'].dt.hour
-    videos = videos.drop(columns=['id', 'videoId', 'title', 'thumbnail', 'description', 'channel', 'publishedAt', 'tags', 'topicCategories', 'language', 'query', 'createdat', 'updatedat', 'categoryid', 'caption', 'titlecharlength', 'titlewordcount', 'descriptioncharlength', 'descriptionwordcount', 'publishedattime', 'publishedatday', 'likesperviewrate', 'commentsperviewrate', 'includestitleemoji'])
+    videos = videos.drop(columns=['id', 'titlewordcount', 'descriptionwordcount', 'videoId', 'includestitleemoji', 'title', 'thumbnail', 'description', 'channel', 'publishedAt', 'tags', 'topicCategories', 'language', 'query', 'createdat', 'updatedat', 'categoryid', 'caption', 'publishedattime', 'publishedatday', 'likesperviewrate', 'commentsperviewrate'])
     videos = videos.dropna()
     return videos
+
+def preprocess_input(input):
+    input['titlecharlength'] = input['title'].apply(len)
+    input['descriptioncharlength'] = input['description'].apply(len)
+    input = input.drop(columns=['title', 'description'])
+    new_order = ['duration', 'titlecharlength', 'descriptioncharlength', 'month', 'weekday', 'hour']
+    input = input[new_order]
+    return input
+
 
 def remove_outliers(df, columns): # Funktion von Chat GPT
     for col in columns: 
