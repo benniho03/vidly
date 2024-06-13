@@ -7,7 +7,7 @@ export default async function ResearchPage() {
                 <img src="/assets/research-hero.jpg" />
             </div>
             <div className="container mx-auto px-20">
-                <div className="background">
+                <div className="background mb-20">
                     <div className="background-bg bg-neutral-700"></div>
                     <h1>Ki-Helper</h1>
                     <p>Here you can find all the information you need to know about video uploading.</p>
