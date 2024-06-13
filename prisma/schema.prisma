@@ -14,23 +14,32 @@ datasource db {
 }
 
 model videos {
-  id              String    @id @default(cuid())
-  videoId         String?
-  title           String?
-  thumbnail       String?
-  description     String?
-  channel         String?
-  likeCount       Int?
-  commentCount    Int?
-  viewCount       Int?
-  duration        Int?
-  publishedAt     DateTime?
-  caption         String?
-  tags            String[]
-  topicCategories String[]
-  language        String?
-  categoryid      Int?
-  query           String?
+  id                    String    @id @default(cuid())
+  videoId               String?
+  title                 String?
+  thumbnail             String?
+  description           String?
+  channel               String?
+  likeCount             Int?
+  commentCount          Int?
+  viewCount             Int?
+  duration              Int?
+  publishedAt           DateTime?
+  caption               String?
+  tags                  String[]
+  topicCategories       String[]
+  language              String?
+  categoryid            Int?
+  query                 String?
+  titlecharlength       Int?
+  titlewordcount        Int?
+  descriptioncharlength Int?
+  descriptionwordcount  Int?
+  publishedattime       String?
+  publishedatday        String?
+  likesperviewrate      Int?
+  commentsperviewrate   Int?
+  includestitleemoji    String?
 }
 
 model videos_v2 {

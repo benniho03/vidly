@@ -3,6 +3,7 @@ import { getVideos } from "~/scripts/videos"
 import { db } from "~/server/db"
 import { authenticateCronJob } from "./auth"
 import { Video } from "~/app/data-mining/youtube/videos"
+import { addCalculatedFields } from "~/scripts/calculated-fields"
 
 export const maxDuration = 30
 export const dynamic = 'force-dynamic'
@@ -175,3 +176,4 @@ export async function createVideosV2(videos: Video[]) {
         })
     }
 }
+
