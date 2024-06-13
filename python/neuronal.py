@@ -36,12 +36,12 @@ def preprocess_data(df):
     df['weekday'] = df['publishedAt'].dt.weekday + 1
     df['hour'] = df['publishedAt'].dt.hour
 
-    df = df[[ 'duration', 'viewCount', 'month', 'weekday', 'hour', 'title_length', 'des_word_count']]
+    df = df[['likeCount', 'commentCount', 'duration', 'viewCount', 'month', 'weekday', 'hour', 'title_length']]
     # Fehlende Werte entfernen
     df = df.dropna()
     
     # Features und Zielwert (viewCount) trennen
-    X = df[[ 'duration', 'month', 'weekday', 'hour', 'title_length', 'des_word_count']]
+    X = df[['likeCount', 'commentCount','duration', 'month', 'weekday', 'hour', 'title_length']]
     y = df['viewCount']
     
     # Daten in Trainings- und Testsets aufteilen
@@ -58,10 +58,6 @@ def preprocess_data(df):
 def create_and_train_model(X_train, y_train):
     model = Sequential()
     model.add(Dense(256, input_dim=X_train.shape[1], activation='relu'))
-    model.add(Dense(64, activation='relu'))
-    model.add(Dense(64, activation='relu'))
-    model.add(Dense(64, activation='relu'))
-    model.add(Dense(64, activation='relu'))
     model.add(Dense(32, activation='relu'))
     model.add(Dense(64, activation='relu'))
     model.add(Dense(64, activation='relu'))
