@@ -73,3 +73,16 @@ model searchterm_helper {
 
   @@id([videoId, query])
 }
+
+model channels {
+  id              String    @id
+  title           String?
+  thumbnail       String?
+  description     String?
+  viewCount       Int?
+  subscriberCount Int?
+  videoCount      Int?
+  country         String?
+  publishedAt     DateTime?
+  madeforkids     String?
+}
