@@ -11,7 +11,6 @@ export function WeekDayByViews({ videos }: { videos: { published: string | null,
 
     const data = formatData({ videos, dateType })
 
-
     return <div>
         <select
             value={dateType}

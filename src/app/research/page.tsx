@@ -6,6 +6,7 @@ import { Video } from "../data-mining/youtube/videos";
 import { EyeIcon, HandThumbUpIcon, ChatBubbleOvalLeftIcon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { WeekDayByViews } from "../gardening/weekDaybyViews";
 import toast from "react-hot-toast";
+import { VideoTable } from "./_data-table/videoDataTable";
 
 export default function ResearchPage() {
 
@@ -60,6 +61,7 @@ function ResearchResults({ keyword }: { keyword: string }) {
                 published: video.publishedAt?.toString()!,
                 viewCount: video.viewCount
             }))} />
+            {/* <VideoTable videos={videos} /> */}
         </div>
     </div>
 }
@@ -78,9 +80,11 @@ async function getResearchData(keyword: string): Promise<Video[]> {
     if (!response.ok) {
         throw new Error("Network response was not ok")
     }
-    const data = await response.json() as Video[]
-    console.log(data)
-    return data
+    const data: Video[] = await response.json()
+    return data.map(video => ({
+        ...video,
+        publishedAt: video.publishedAt ? new Date(video.publishedAt) : undefined
+    })) as Video[]
 }
 
 function VideoDisplay({ video }: { video: Video }) {
