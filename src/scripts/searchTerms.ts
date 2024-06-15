@@ -1,4 +1,4 @@
-import { keywords } from "~/app/api/cron/route";
+import { keywords } from "~/keywords";
 import { db } from "~/server/db";
 
 await db.searchterms.createMany({
