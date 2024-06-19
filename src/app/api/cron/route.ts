@@ -4,6 +4,7 @@ import { db } from "~/server/db"
 import { authenticateCronJob } from "./auth"
 import { Video } from "~/app/data-mining/youtube/videos"
 import { addCalculatedFields } from "~/scripts/calculated-fields"
+import { createChannelData } from "~/scripts/get-channel-id"
 import { keywords } from "~/keywords"
 
 export const maxDuration = 30
@@ -15,11 +16,11 @@ export async function GET(req: NextRequest) {
 
         const now = new Date()
 
-        const { authenticated } = authenticateCronJob(req)
-        if (!authenticated) {
-            console.error("Received unauthorized request")
-            return new Response("Unauthorized", { status: 401 })
-        }
+        // const { authenticated } = authenticateCronJob(req)
+        // if (!authenticated) {
+        //     console.error("Received unauthorized request")
+        //     return new Response("Unauthorized", { status: 401 })
+        // }
         let results: Video[] = []
 
         for (let i = 0; i < 4; i++) {
@@ -48,6 +49,26 @@ export async function GET(req: NextRequest) {
         console.log("V1 created")
 
         console.warn("Created " + count + " videos")
+
+        const channelIds = results.map(video => video.channel)
+        const notCreatedChannelIds: string[] = [];
+
+        for (const channelId of channelIds) {
+            const currentChannel = await db.channels.findFirst({
+                where: {
+                    id: {
+                        contains: channelId
+                    }
+                }
+            })
+            if (currentChannel) return
+            notCreatedChannelIds.push(channelId)
+        }
+
+        for (let i = 0; i < Math.ceil(notCreatedChannelIds.length / 50); i++) {
+            const chunk = notCreatedChannelIds.slice(i * 50, (i + 1) * 50)
+            await createChannelData(chunk)
+        }
 
         return new Response(`Created ${count} videos`, {
             status: 200,

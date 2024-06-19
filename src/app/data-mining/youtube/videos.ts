@@ -62,7 +62,7 @@ export async function getVideoDetails({
             title: item.snippet.title ?? null,
             thumbnail: item.snippet.thumbnails.default.url ?? null,
             description: item.snippet.description ?? null,
-            channel: item.snippet.channelTitle ?? null,
+            channel: item.snippet.channelId ?? null,
             categoryid: Number(item.snippet.categoryId) ?? null,
             likeCount: Number(item.statistics.likeCount) ?? null,
             commentCount: Number(item.statistics.commentCount) ?? null,
