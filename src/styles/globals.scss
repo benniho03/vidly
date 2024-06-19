@@ -36,6 +36,19 @@ body {
 h1{
     font-size: 5rem;
     text-transform: uppercase;
+    font-weight: 800;
+
+}
+
+h2{
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    line-height: 2.5rem;
+    font-weight: 800;
+}
+
+p{
+  margin-top: 2rem;  
 }
 
 button{
@@ -45,9 +58,9 @@ button{
 
 .background {
     position: relative;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    margin-bottom: 12rem;
+    padding-top: 4rem;
+    padding-bottom: 5rem;
+    
     .background-bg {
         bottom: 0;
         height: 100%;
@@ -82,5 +95,18 @@ button{
         img{
             object-fit: cover;
         }
+    }
+}
+
+.two-column{
+    justify-content: space-between;
+    align-items: center;
+    .column-one{
+     padding-right: 4rem;
+     width: 60%;
+    }
+    .column-two{
+        width: 30%;
+        height: 80%;
     }
 }

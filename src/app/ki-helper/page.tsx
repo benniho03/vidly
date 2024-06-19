@@ -7,7 +7,7 @@ export default async function KiHelper() {
                 <img src="/assets/hero-ki.jpg" />
             </div>
             <div className="container mx-auto px-20">
-                <div className="background">
+                <div className="background mb-20">
                     <div className="background-bg bg-indigo-950"></div>
                     <h1>Ki-Helper</h1>
                     <p>Here you can find all the information you need to know about video uploading.</p>
