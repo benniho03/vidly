@@ -69,8 +69,8 @@ export default async function queryVideos() {
     await createChannelData(channelIds)
 
 }
-// await queryVideos()
-console.log("Uncomment the above line to run the script.")
+await queryVideos()
+// console.log("Uncomment the above line to run the script.")
 
 export async function createChannelData(channelIds: string[]) {
 
