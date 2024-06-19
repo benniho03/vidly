@@ -16,11 +16,11 @@ export async function GET(req: NextRequest) {
 
         const now = new Date()
 
-        // const { authenticated } = authenticateCronJob(req)
-        // if (!authenticated) {
-        //     console.error("Received unauthorized request")
-        //     return new Response("Unauthorized", { status: 401 })
-        // }
+        const { authenticated } = authenticateCronJob(req)
+        if (!authenticated) {
+            console.error("Received unauthorized request")
+            return new Response("Unauthorized", { status: 401 })
+        }
         let results: Video[] = []
 
         for (let i = 0; i < 4; i++) {

@@ -1,3 +1,4 @@
+import { MachineLearningForm } from "./mlForm";
 
 
 export default async function KiHelper() {
@@ -20,7 +21,7 @@ export default async function KiHelper() {
                         <div className="picture-two">
                             <img src="/assets/ki-image-2.jpg" />
                         </div>
-
+                        <MachineLearningForm />
                     </div>
                 </div>
             </div>
