@@ -14,7 +14,8 @@ type channelData = {
     madeforkids: string
 }
 
-await getVideoChannelId()
+// await getVideoChannelId() // uncomment to run
+console.log("Uncomment to run getVideoChannelId")
 
 async function getVideoChannelId() {
 
