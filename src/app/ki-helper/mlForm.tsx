@@ -106,7 +106,9 @@ export function MachineLearningForm() {
 
 function Result({ result, isLoading, title, handle }: { result: MLResults | null, isLoading: boolean, title: string, handle: string }) {
 
-    if (isLoading) return <LoadingSpinner />
+    if (isLoading) return <div className='w-full flex justify-center'>
+        <LoadingSpinner />
+    </div>
     if (!result) return
 
     return <>
