@@ -21,9 +21,9 @@ export default async function KiHelper() {
                         <div className="picture-two">
                             <img src="/assets/ki-image-2.jpg" />
                         </div>
-                        <MachineLearningForm />
                     </div>
                 </div>
+                <MachineLearningForm />
             </div>
         </div>
     );

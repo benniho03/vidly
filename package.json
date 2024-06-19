@@ -16,6 +16,7 @@
   "dependencies": {
     "@headlessui/react": "^2.0.4",
     "@headlessui/tailwindcss": "^0.2.1",
+    "@heroicons/react": "^2.1.4",
     "@prisma/client": "^5.10.2",
     "@remixicon/react": "^4.2.0",
     "@t3-oss/env-nextjs": "^0.9.2",
@@ -28,8 +29,9 @@
     "next": "^14.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "server-only": "^0.0.1",
     "sass": "^1.77.4",
+    "server-only": "^0.0.1",
+    "swr": "^2.2.5",
     "zod": "3.22.4"
   },
   "devDependencies": {
