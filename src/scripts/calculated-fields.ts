@@ -1,7 +1,8 @@
 import { Video } from "~/app/data-mining/youtube/videos"
 import { db } from "~/server/db"
 
-await addCalculatedFields()
+// await addCalculatedFields() // Uncomment this line to run the script
+// Imports from this file run the script, why tf???
 
 export async function addCalculatedFields() {
     const videos = await db.videos.findMany()
@@ -28,6 +29,21 @@ export async function addCalculatedFields() {
     // let newVideo: VideoWithCalculatedfields = { ...video, titleCharLength: null };
     // newVideo = {...video, titleCharLength: getTitleCharLength(video)}
 
+}
+
+export function getCalculatedFields(video: Video) {
+    return ({
+        ...video,
+        titlecharlength: getTitleCharLength(video),
+        titlewordcount: getTitleWordCount(video),
+        descriptioncharlength: getDescriptionCharLength(video),
+        descriptionwordcount: getDescriptionWordCount(video),
+        publishedattime: getPublishedAtTime(video),
+        publishedatday: getPublishedAtDay(video),
+        likesperviewrate: getLikesPerViewRate(video),
+        commentsperviewrate: getCommentsPerViewRate(video),
+        includestitleemoji: getIncludesTitleEmoji(video).toString()
+    })
 }
 
 function getTitleCharLength(video: Video) {

@@ -1,5 +1,13 @@
 export async function getVideoIdsFromSearch({ searchTerm, maxResults, newAPIToken = false }: { searchTerm: string, maxResults: number, newAPIToken?: boolean }) {
 
+    const apiToken = newAPIToken ? process.env.API_KEY_NEW! : process.env.API_KEY!
+
+    return await fetchVideoIds({ searchTerm, maxResults, apiToken })
+
+}
+
+export async function fetchVideoIds({ searchTerm, maxResults, apiToken }: { searchTerm: string, maxResults: number, apiToken: string }) {
+    console.log("Fetching video ids")
     const videoIds: string[] = []
     let nextPageToken: string | undefined;
 
@@ -8,9 +16,7 @@ export async function getVideoIdsFromSearch({ searchTerm, maxResults, newAPIToke
         const params = new URLSearchParams({
             part: "snippet",
             q: searchTerm,
-            key: newAPIToken ?
-                process.env.API_KEY_NEW as string :
-                process.env.API_KEY as string,
+            key: apiToken,
             maxResults: maxResults.toString(), // 50 is max
             type: "video",
             pageToken: nextPageToken ?? "",
@@ -35,5 +41,4 @@ export async function getVideoIdsFromSearch({ searchTerm, maxResults, newAPIToke
     }
 
     return videoIds
-
-}
+} 
