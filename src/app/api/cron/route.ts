@@ -12,6 +12,8 @@ export const dynamic = 'force-dynamic'
 
 export async function GET(req: NextRequest) {
 
+    return new Response("Hello World", { status: 200 })
+
     try {
 
         const now = new Date()
