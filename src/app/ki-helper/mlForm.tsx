@@ -31,8 +31,9 @@ export function MachineLearningForm() {
         })
     }
 
-    return <div className="flex flex-col gap-3 mx-auto">
+    return <div className="ki-form flex flex-col gap-3 mx-auto">
         <h2>Your Video</h2>
+        <p className="mb-8">Enter the information about your video with which you would upload it and see how many likes, comments and so on your video will achieve.</p>
         <div className="flex gap-3 ">
             <div className="flex flex-col w-1/3">
                 <label htmlFor="handle">Channel Handle</label>
@@ -57,7 +58,7 @@ export function MachineLearningForm() {
                 <input onChange={e => setPublishedAt(new Date(e.target.value))} type="datetime-local" placeholder="publishedAt" name="publishedAt" className="text-neutral-800" />
             </div>
         </div>
-        <button className="w-full bg-fuchsia-500 py-3" onClick={(handleSubmit)}>Submit</button>
+        <button className="w-full text-white bg-fuchsia-800 hover:bg-fuchsia-500 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium text-sm px-5 py-2.5 me-2 mb-2 dark:bg-fuchsia-800 dark:hover:bg-fuchsia-500 dark:focus:ring-gray-700 dark:border-gray-700" onClick={(handleSubmit)}>submit</button>
         <Result result={result} isLoading={isLoading} title={title} handle={handle} />
     </div>
 

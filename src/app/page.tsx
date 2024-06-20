@@ -28,8 +28,7 @@ export default function Home() {
           <div className="two-column flex space-x-4">
             <div className="column-one">
               <h2>Gardening</h2>
-              <p>Our solution is designed to provide creators with data-based tips and assistance on how they can improve factors that influence the algorithm in their own videos in order to potentially rank better on the platform.
-                Creators can find helpful tips for their videos on the Gardening, Research and AI Helper page.</p>
+              <p>Are you interested in the topic of gardening? Do you produce video content on this topic? Have you always wanted to know when the best time is to upload a video on this topic so that it gets lots of clicks? You can find all the relevant information on the Gardening page. </p>
               <a href="/gardening">
                 <button type="button" className="text-white bg-gray-950 hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-950 dark:hover:bg-gray-800 dark:focus:ring-gray-700 dark:border-gray-700">more</button>
               </a>
@@ -45,8 +44,7 @@ export default function Home() {
           <div className="two-column flex space-x-4">
             <div className="column-one">
               <h2>Research</h2>
-              <p>Our solution is designed to provide creators with data-based tips and assistance on how they can improve factors that influence the algorithm in their own videos in order to potentially rank better on the platform.
-                Creators can find helpful tips for their videos on the Gardening, Research and AI Helper page.</p>
+              <p>Or would you like information on another topic? Then the research page is the right place for you! Search for any topic and you will be shown various existing videos. Of course, you will also be shown information on the optimum upload time. Take a look.</p>
               <a href="/research">
                 <button type="button" className="text-white bg-gray-950 hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-950 dark:hover:bg-gray-800 dark:focus:ring-gray-700 dark:border-gray-700">more</button>
               </a>
@@ -62,8 +60,7 @@ export default function Home() {
           <div className="two-column flex space-x-4">
             <div className="column-one">
               <h2>KI-Helper</h2>
-              <p>Our solution is designed to provide creators with data-based tips and assistance on how they can improve factors that influence the algorithm in their own videos in order to potentially rank better on the platform.
-                Creators can find helpful tips for their videos on the Gardening, Research and AI Helper page.</p>
+              <p>You have created your video. Now you want to know how many likes, comments and views your video will get? Then take a look at our AI Helper! Simply enter your video information, such as title, description and so on, and we'll show you how successful your video can be.</p>
               <a href="/ki-helper">
                 <button type="button" className="text-white bg-fuchsia-800 hover:bg-fuchsia-500 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium text-sm px-5 py-2.5 me-2 mb-2 dark:bg-fuchsia-800 dark:hover:bg-fuchsia-500 dark:focus:ring-gray-700 dark:border-gray-700">more</button>
               </a>
