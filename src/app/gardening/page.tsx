@@ -4,6 +4,8 @@ import { Video } from "../data-mining/youtube/videos";
 import { ViewsByCategory } from "./viewsByCategory";
 import { WeekDayByViews } from "./weekDaybyViews";
 import { ViewsByTagsCount } from "./viewsByTagsCount";
+import ViewsDiagrams from "../tremor/viewsDiagrams";
+import { DiagramDisplay } from "../tremor/diagramDisplay";
 
 export default async function Gardening() {
 
@@ -16,26 +18,36 @@ export default async function Gardening() {
                 <img src="/assets/hero-gardening.jpg"/>
             </div>
             <div className="container mx-auto px-20">
-            <div className="background">
+            <div className="background mb-20">
                <div className="background-bg bg-lime-950"></div> 
             <h1>Gardening</h1>
-            <p>Here you can find all the information you need to know about gardening.</p>
+            <p>Welcome to our Gardening page. Are you interested in this topic? Do you create content for YouTube? Here you will find all the interesting information on this topic. For example, you can find out when the perfect time is to upload your video to get as many views as possible. Try it out!</p>
             <button type="button" className="text-white bg-gray-950 hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-950 dark:hover:bg-gray-800 dark:focus:ring-gray-700 dark:border-gray-700">more</button>
-
+            <div className="pictures flex space-x-4">
+                    
+                    <div className="picture-one">
+                    <img src="/assets/gardening-image-1.jpg" />
+                    </div>
+                    <div className="picture-two">
+                    <img src="/assets/gardening-image-2.jpg" />
+                    </div>
+                
+                </div>
             </div>
             {/* <AmountOfVideosByCategory videos={formatVideos(videos)} />
             <ViewsByCategory videos={videos.map(v => ({
                 categoryid: v.categoryid,
                 viewCount: v.viewCount
             }))} /> */}
-            <WeekDayByViews videos={videos.map(v => ({
+           {/* <WeekDayByViews videos={videos.map(v => ({
                 published: v.publishedAt,
                 viewCount: v.viewCount
             }))} />
             <ViewsByTagsCount videos={videos.map(v => ({
                 tagsCount: v.tags.length,
                 viewCount: v.viewCount
-            }))} />
+            }))} />*/}
+            <DiagramDisplay/>
             </div>
         </div>
     );

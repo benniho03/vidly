@@ -3,80 +3,16 @@ import { getVideos } from "~/scripts/videos"
 import { db } from "~/server/db"
 import { authenticateCronJob } from "./auth"
 import { Video } from "~/app/data-mining/youtube/videos"
+import { addCalculatedFields } from "~/scripts/calculated-fields"
+import { createChannelData } from "~/scripts/get-channel-id"
+import { keywords } from "~/keywords"
 
 export const maxDuration = 30
 export const dynamic = 'force-dynamic'
 
-export const keywords = [
-    "garden",
-    "gardening",
-    "flowers",
-    "greenhouse",
-    "plants",
-    "vegetables",
-    "fruit",
-    "trees",
-    "landscaping",
-    "gardens",
-    "lawn",
-    "soil",
-    "compost",
-    "mulch",
-    "fertilizer",
-    "garden pests",
-    "weeds",
-    "plant disease",
-    "plant pruning",
-    "plant propagation",
-    "gardening tools",
-    "gardening equipment",
-    "watering",
-    "Weed control",
-    "Gardening tips",
-    "Garden life hacks",
-    "Garden tutorials",
-    "Repotting plants",
-    "Taking plant cuttings",
-    "Garden care",
-    "Garden ideas",
-    "Garden projects",
-    "DIY garden",
-    "Pruning roses",
-    "Creating raised beds",
-    "Herb garden",
-    "Harvesting herbs",
-    "Orchard",
-    "Planting fruit trees",
-    "Planting berries",
-    "Winter-hardy plants",
-    "Low-maintenance plants",
-    "Natural garden",
-    "Mowing the lawn",
-    "Seeding the lawn",
-    "Laying sod",
-    "Fertilizing the lawn",
-    "Gardening for beginners",
-    "Vertical garden",
-    "Planting a balcony garden",
-    "Creating a garden pond",
-    "Pond maintenance",
-    "Creating a lawn",
-    "Pruning trees",
-    "Pruning shrubs",
-    "Child-friendly garden",
-    "Building a birdhouse",
-    "Insect hotel",
-    "Wildlife in the garden",
-    "Frost protection in the garden",
-    "Summer flowers",
-    "Spring flowers",
-    "Garden furniture",
-    "Garden lighting",
-    "Garden decoration",
-    "Taking cuttings",
-] as const
-
 export async function GET(req: NextRequest) {
+
+    return new Response("Hello World", { status: 200 })
 
     try {
 
@@ -115,6 +51,26 @@ export async function GET(req: NextRequest) {
         console.log("V1 created")
 
         console.warn("Created " + count + " videos")
+
+        const channelIds = results.map(video => video.channel)
+        const notCreatedChannelIds: string[] = [];
+
+        for (const channelId of channelIds) {
+            const currentChannel = await db.channels.findFirst({
+                where: {
+                    id: {
+                        contains: channelId
+                    }
+                }
+            })
+            if (currentChannel) return
+            notCreatedChannelIds.push(channelId)
+        }
+
+        for (let i = 0; i < Math.ceil(notCreatedChannelIds.length / 50); i++) {
+            const chunk = notCreatedChannelIds.slice(i * 50, (i + 1) * 50)
+            await createChannelData(chunk)
+        }
 
         return new Response(`Created ${count} videos`, {
             status: 200,
@@ -175,3 +131,4 @@ export async function createVideosV2(videos: Video[]) {
         })
     }
 }
+

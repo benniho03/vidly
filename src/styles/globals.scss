@@ -13,9 +13,9 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --foreground-rgb: 255, 255, 255;
-        --background-start-rgb: 0, 0, 0;
-        --background-end-rgb: 0, 0, 0;
+        --foreground-rgb: 0, 0, 0;
+        --background-start-rgb: 255, 255, 255;
+        --background-end-rgb: 255, 255, 255;
     }
 }
 
@@ -24,6 +24,7 @@ body {
     background: linear-gradient(to bottom,
             transparent,
             rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+    min-height: 500px;        
 }
 
 @layer utilities {
@@ -35,17 +36,32 @@ body {
 h1{
     font-size: 5rem;
     text-transform: uppercase;
+    font-weight: 800;
+
+}
+
+h2{
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    line-height: 2.5rem;
+    font-weight: 800;
+}
+
+p{
+  margin-top: 2rem;  
 }
 
 button{
     margin-top: 1.5rem;
 }
 
+
 .background {
     position: relative;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    margin-bottom: 3rem;
+    padding-top: 4rem;
+    padding-bottom: 5rem;
+    color: white;
+    
     .background-bg {
         bottom: 0;
         height: 100%;
@@ -59,4 +75,49 @@ button{
         z-index: -1;
    
     }
+}
+
+.pictures{
+    justify-content: space-between;
+    align-items: baseline;
+    position: relative;
+    bottom: -10rem;
+    margin-top: -4rem;
+
+    
+    .picture-one{
+        width: 35%;
+    }
+
+    .picture-two{
+        width: 50%;
+        height: 80%;
+
+        img{
+            object-fit: cover;
+        }
+    }
+}
+
+.two-column{
+    justify-content: space-between;
+    align-items: center;
+    .column-one{
+     padding-right: 4rem;
+     width: 60%;
+    }
+    .column-two{
+        width: 30%;
+        height: 80%;
+    }
+}
+
+.ki-form{
+    margin-top: 10rem;
+    margin-bottom: 3rem;
+
+}
+.searchform{
+    margin-top: 10rem;
+    margin-bottom: 3rem;
 }
