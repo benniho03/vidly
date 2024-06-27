@@ -1,5 +1,5 @@
 import { Card } from '@tremor/react';
-import { LineChart } from '@tremor/react';
+import { BarChart } from '@tremor/react';
 import { db } from '~/server/db';
 
 type ViewsPerHour = {
@@ -135,7 +135,7 @@ export default function ViewsPerHour(videos: any) {
     let publishedOn = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 
-    for (const video of videos.videos.videos) {
+    for (const video of videos.videos.videos.videos) {
         const uploadDate = video.publishedAt
         console.log(video.publishedAt?.getHours())
         const hour = video.publishedAt?.getHours();
@@ -299,7 +299,7 @@ export default function ViewsPerHour(videos: any) {
     });
 
     return <>
-        <LineChart
+        <BarChart
             index="hour"
             data={data}
             categories={['viewCount', 'videos']}

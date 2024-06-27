@@ -3,9 +3,8 @@
 import { db } from "~/server/db"
 import ViewsDiagrams from "./viewsDiagrams"
 
-export async function DiagramDisplay(){
-    const videos = await db.videos.findMany()
+export async function DiagramDisplay(videos: any) {
     return <>
-    <ViewsDiagrams videos={videos}></ViewsDiagrams>
+        <ViewsDiagrams videos={videos}></ViewsDiagrams>
     </>
 }
