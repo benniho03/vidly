@@ -50,9 +50,16 @@ export default async function Gardening() {
                 tagsCount: v.tags.length,
                 viewCount: v.viewCount
             }))} />*/}
-                <NumberFact videos={rawVideos} prop={"title length"} />
-                <NumberFact videos={rawVideos} prop={"description length"} />
-                <NumberFact videos={rawVideos} prop={"duration"} />
+
+                <div className="keyfacts">
+                    <h2>Key facts</h2>
+                    <div className="number-facts grid grid-cols-3 gap-4">
+
+                        <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"title length"} /></div>
+                        <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"description length"} /></div>
+                        <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"duration"} /></div>
+                    </div>
+                </div>
                 <DiagramDisplay videos={rawVideos} />
             </div>
         </div>

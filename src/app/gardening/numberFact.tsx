@@ -28,8 +28,10 @@ export function NumberFact({ videos, prop }: { videos: any[], prop: String, }) {
 
     return (
         <>
-            <p>{average}</p >
-            <p>⌀ {prop}</p>
+            <p className="content">{average}</p >
+            <p className="content-title">⌀ {prop}</p>
+            
+           
         </>
     )
 }
