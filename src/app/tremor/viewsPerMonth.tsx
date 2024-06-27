@@ -1,5 +1,5 @@
 import { Card } from '@tremor/react';
-import { LineChart } from '@tremor/react';
+import { BarChart } from '@tremor/react';
 import { db } from '~/server/db';
 
 type ViewsPerMonth = {
@@ -167,7 +167,7 @@ export default function ViewsPerMonth(videos: any) {
     });
 
     return <>
-        <LineChart
+        <BarChart
             index="month"
             data={data}
             categories={['viewCount', 'videos']}

@@ -1,5 +1,5 @@
 import { Card } from '@tremor/react';
-import { LineChart } from '@tremor/react';
+import { BarChart } from '@tremor/react';
 import { db } from '~/server/db';
 
 type ViewsPerWeekday = {
@@ -112,7 +112,7 @@ export default function ViewsPerWeekday(videos: any) {
     });
 
     return <>
-        <LineChart
+        <BarChart
             index="weekday"
             data={data}
             categories={['viewCount', 'videos']}
