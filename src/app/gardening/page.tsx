@@ -7,6 +7,7 @@ import { ViewsByTagsCount } from "./viewsByTagsCount";
 import ViewsDiagrams from "../tremor/viewsDiagrams";
 import { DiagramDisplay } from "../tremor/diagramDisplay";
 import { NumberFact } from "./numberFact";
+import ScatterPlot from "~/components/scatter-plot";
 
 export default async function Gardening() {
 
@@ -17,6 +18,7 @@ export default async function Gardening() {
 
     return (
         <div>
+            <ScatterPlot videos={videos} axis1="viewCount" axis2="duration"/>
             <div className="hero">
                 <img src="/assets/hero-gardening.jpg" />
             </div>
