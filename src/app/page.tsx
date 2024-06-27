@@ -14,13 +14,32 @@ export default function Home() {
           <h2>SOME FEAR HIM</h2>
           <h2 >HARDLY ANYONE UNDERSTANDS HIM</h2>
           <p mt-10>The profession of content creator has become much more popular in recent years, with many more videos appearing on the YouTube platform every day than just a few years ago. Creators, who earn their living from the platform, are heavily dependent on the clicks on their videos, but due to the increased competition and the algorithm used by YouTube, it is becoming increasingly difficult to get many users interested in your own video.</p>
+          <div className="keyfacts">
+          <div className="number-facts grid grid-cols-3 gap-4">
+
+            <div className="number-facts-item">
+            <p className="content">2,491 Bn.</p >
+            <p className="content-title">users</p>
+            <p className='content-small'>per month</p>
+            </div>
+            <div className="number-facts-item">
+            <p className="content">720.000</p >
+            <p className="content-title">hours</p>
+            <p className='content-small'>Videomaterial per day</p>
+            </div>
+            <div className="number-facts-item">
+            <p className="content">300 Mio.</p >
+            <p className="content-title">dollar </p>
+            <p className='content-small'>were generated in advertising revenue from all YouTube combined in 2021</p>
+            </div>
+          </div>
+          </div>
         </div>
 
         <div className="background mb-0 ">
           <div className="background-bg bg-white"></div>
           <h2 className="text-black">The solution: vidly</h2>
-          <p className="text-black">Our solution is designed to provide creators with data-based tips and assistance on how they can improve factors that influence the algorithm in their own videos in order to potentially rank better on the platform.
-            Creators can find helpful tips for their videos on the Gardening, Research and AI Helper page.</p>
+          <p className="text-black">Our product provides content creators with the ability to analyze videos in their niche using data-driven insights and display the most critical information in an easy-to-understand format. With our AI Helper, they can even test the success potential of their video ideas before publication. All our analyses and predictions are based on real-time data directly from YouTube.</p>
         </div>
 
         <div className="background mb-0">
@@ -28,7 +47,9 @@ export default function Home() {
           <div className="two-column flex space-x-4">
             <div className="column-one">
               <h2>Gardening</h2>
-              <p>Are you interested in the topic of gardening? Do you produce video content on this topic? Have you always wanted to know when the best time is to upload a video on this topic so that it gets lots of clicks? You can find all the relevant information on the Gardening page. </p>
+              <p>Discover the valuable insights that can be obtained from the YouTube API. Using the example of the gardening niche, we provide you with fascinating graphics and information to help you analyze your content.
+
+Want to know what the API offers, the optimal time to publish your videos, or the ideal length for your titles? You're in the right place.</p>
               <a href="/gardening">
                 <button type="button" className="text-white bg-gray-950 hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-950 dark:hover:bg-gray-800 dark:focus:ring-gray-700 dark:border-gray-700">more</button>
               </a>
@@ -44,7 +65,7 @@ export default function Home() {
           <div className="two-column flex space-x-4">
             <div className="column-one">
               <h2>Research</h2>
-              <p>Or would you like information on another topic? Then the research page is the right place for you! Search for any topic and you will be shown various existing videos. Of course, you will also be shown information on the optimum upload time. Take a look.</p>
+              <p>Would you prefer real-time information on a topic of your choice? Then our Research page is the perfect place for you. Enter your topic in the search bar and explore the best videos and informative graphics related to it.</p>
               <a href="/research">
                 <button type="button" className="text-white bg-gray-950 hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-950 dark:hover:bg-gray-800 dark:focus:ring-gray-700 dark:border-gray-700">more</button>
               </a>

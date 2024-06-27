@@ -69,16 +69,25 @@ export default async function Gardening() {
                 viewCount: v.viewCount
             }))} />*/}
 
-                <div className="keyfacts">
+                <div className="keyfacts mt-8">
+                    <h2>Key facts</h2>
+                    <div className="number-facts grid grid-cols-3 gap-4">
+
+                        <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"video count"} /></div>
+                        <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"duration"} /></div>
+                        <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"views"} /></div>
+                    </div>
+                </div>
+                <DiagramDisplay videos={rawVideos} />
+                <div className="keyfacts mt-8">
                     <h2>Key facts</h2>
                     <div className="number-facts grid grid-cols-3 gap-4">
 
                         <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"title length"} /></div>
                         <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"description length"} /></div>
-                        <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"duration"} /></div>
+                        <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"likes"} /></div>
                     </div>
                 </div>
-                <DiagramDisplay videos={rawVideos} />
             </div>
         </div>
     );

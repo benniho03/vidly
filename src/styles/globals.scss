@@ -126,7 +126,7 @@ button {
 }
 
 .keyfacts {
-    margin-top: 9rem;
+    margin-top: 7rem;
     .number-facts {
         .number-facts-item {
             text-align: center;
@@ -138,6 +138,10 @@ button {
 
             .content-title {
                 margin-top: 0px;
+            }
+            .content-small{
+                margin-top: 0.5rem;
+                font-size: 0.7rem;
             }
         }
 
