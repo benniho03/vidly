@@ -15,7 +15,7 @@ export default async function Gardening() {
     return (
         <div>
             <div className="hero">
-                <img src="/assets/hero-gardening.jpg"/>
+                <img src="/assets/hero-gardening.jpg" />
             </div>
             <div className="container mx-auto px-20">
             <div className="background mb-20">
@@ -34,26 +34,13 @@ export default async function Gardening() {
                 
                 </div>
             </div>
-            {/* <AmountOfVideosByCategory videos={formatVideos(videos)} />
-            <ViewsByCategory videos={videos.map(v => ({
-                categoryid: v.categoryid,
-                viewCount: v.viewCount
-            }))} /> */}
-           {/* <WeekDayByViews videos={videos.map(v => ({
-                published: v.publishedAt,
-                viewCount: v.viewCount
-            }))} />
-            <ViewsByTagsCount videos={videos.map(v => ({
-                tagsCount: v.tags.length,
-                viewCount: v.viewCount
-            }))} />*/}
             <DiagramDisplay/>
             </div>
         </div>
     );
 }
 
-function assertVideos(videos: any): Video[] {
+export function assertVideos(videos: any): Video[] {
     return videos.map((video: any) => ({
         id: video.id,
         videoId: video.videoId ?? "",
