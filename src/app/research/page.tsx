@@ -13,16 +13,18 @@ export default function ResearchPage() {
     const [keyword, setKeyword] = useState(getKeyword())
 
     return <>
+
+        {keyword && <div className="max-w-7xl mx-auto"><h1>Researching {keyword}</h1></div>}
         <form
             action={updateKeyword}
             className="max-w-7xl mx-auto flex items-center justify-center gap-2 my-3"
         >
-            <input type="text" name="keyword" placeholder="Type your keyword" className="text-neutral-900" />
+            <input type="text" name="keyword" placeholder="Type your keyword" className="text-neutral-900 w-full px-2 py-4" />
             <button
                 type="submit"
                 className="m-0 flex gap-1 items-center"
             >
-                Search <MagnifyingGlassIcon className="size-3" />
+                <MagnifyingGlassIcon className="size-12" />
             </button>
         </form>
         {
@@ -52,7 +54,6 @@ function ResearchResults({ keyword }: { keyword: string }) {
     if (!videos || !videos.length) return <div>No videos found</div>
 
     return <div>
-        <h1>Researching {keyword}</h1>
         <div className="max-w-7xl mx-auto">
             <div className="flex flex-col gap-3">
                 {videos.map(video => <VideoDisplay video={video} />)}
