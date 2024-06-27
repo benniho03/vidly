@@ -51,4 +51,5 @@ export async function removeDuplicateVideoIds() {
   }
 }
 
-await removeDuplicateVideoIds();
+// await removeDuplicateVideoIds();
+console.log("Uncomment the above line to run the script.")

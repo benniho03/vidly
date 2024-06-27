@@ -22,4 +22,5 @@ const videosNotNull = allVideos.map(video => ({
     query: video.query!,
 }))
 
-await createVideosV2(videosNotNull)
+// await createVideosV2(videosNotNull)
+console.log("Uncomment the above line to run the migration script.")
