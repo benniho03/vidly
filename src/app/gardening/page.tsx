@@ -68,20 +68,74 @@ export default async function Gardening() {
                 tagsCount: v.tags.length,
                 viewCount: v.viewCount
             }))} />*/}
-
-                <div className="keyfacts">
+                <div className="keyfacts mt-8">
                     <h2>Key facts</h2>
                     <div className="number-facts grid grid-cols-3 gap-4">
 
+                        <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"video count"} /></div>
+                        <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"duration"} /></div>
+                        <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"views"} /></div>
+                    </div>
+                </div>
+                <DiagramDisplay videos={rawVideos} />
+                <div className="keyfacts">
+                    <h2>Key facts</h2>
+                    <div className="number-facts grid grid-cols-3 gap-4">
                         <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"title length"} /></div>
                         <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"description length"} /></div>
                         <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"duration"} /></div>
                     </div>
                 </div>
-                <DiagramDisplay videos={rawVideos} />
+
+                <div className="mt-8 mb-8">
+                    <h2>Top 10 videos</h2>
+                    <div className="video-list grid grid-cols-2 gap-x-4 gap-y-8">
+                        <Top10Videos />
+                    </div>
+                </div>
             </div>
         </div>
     );
+}
+
+async function Top10Videos() {
+    const top10Videos = await db.videos.findMany({
+        orderBy: {
+            viewCount: "desc",
+        },
+        take: 10,
+        distinct: "videoId",
+        where: {
+            NOT: {
+                categoryid: 10,
+            },
+            title: {
+                contains: "garden"
+            }
+        }
+    })
+
+    return (
+        top10Videos.map((video, index) => {
+            return <>
+
+
+                <div className="video-list-item grid grid-cols-2 gap-4 items-center">
+                    <div className="video-list-item-image">
+                        <img src={video.thumbnail!} width="100%" />
+                    </div>
+                    <div className="video-list-item-content">
+                        <p className="video-title">{index + 1}.</p>
+                        <p className="video-title">{video.title}</p>
+                        <p className="video-viewcount">View count: {video.viewCount}</p>
+                        <p className="video-channel">Channel: {video.channel}</p>
+                    </div>
+                </div>
+
+            </>
+        })
+    )
+
 }
 
 export function assertVideos(videos: any): Video[] {
