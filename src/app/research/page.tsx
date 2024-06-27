@@ -55,14 +55,27 @@ function ResearchResults({ keyword }: { keyword: string }) {
 
     return <div>
         <div className="max-w-7xl mx-auto">
-            <div className="flex flex-col gap-3">
-                {videos.map(video => <VideoDisplay video={video} />)}
-            </div>
+            <VideoList videos={videos} />
             <WeekDayByViews videos={videos.map(video => ({
                 published: video.publishedAt?.toString()!,
                 viewCount: video.viewCount
             }))} />
             {/* <VideoTable videos={videos} /> */}
+        </div>
+    </div>
+}
+
+function VideoList({ videos }: { videos: Video[] }) {
+    const PAGE_SIZE = 10
+    const [page, setPage] = useState(1)
+
+    return <div className="flex flex-col gap-3">
+
+        {[...videos].splice(page * PAGE_SIZE, PAGE_SIZE).map(video => <VideoDisplay video={video} />)}
+        <div className="flex gap-4">
+            <button onClick={() => setPage(page - 1)}>Previous</button>
+            <span>Page {page}</span>
+            <button onClick={() => setPage(page + 1)}>Next</button>
         </div>
     </div>
 }

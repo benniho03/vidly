@@ -2,7 +2,7 @@ import { NextRequest } from "next/server"
 import { getVideos } from "~/scripts/videos"
 import { db } from "~/server/db"
 
-const AMOUNT_OF_VIDEOS = 5
+const AMOUNT_OF_VIDEOS = 100
 
 export const dynamic = "force-dynamic"
 export async function GET(_req: NextRequest, { params: { keyword } }: { params: { keyword: string } }) {
