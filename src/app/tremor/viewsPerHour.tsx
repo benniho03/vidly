@@ -137,7 +137,6 @@ export default function ViewsPerHour(videos: any) {
 
     for (const video of videos.videos.videos) {
         const uploadDate = video.publishedAt
-        console.log(video.publishedAt?.getHours())
         const hour = video.publishedAt?.getHours();
 
 

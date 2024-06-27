@@ -51,11 +51,7 @@ const data: ViewsPerWeekday[] = [{
 }]
 
 let publishedOn = [0, 0, 0, 0, 0, 0, 0]
-
-console.log("VIDEOS FUCK:",videos.videos.videos)
-
 for (const video of videos.videos.videos) {
-    console.log(video.viewCount, video.publishedatday)
     const weekday = video.publishedatday;
 
 

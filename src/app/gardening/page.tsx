@@ -6,6 +6,7 @@ import { WeekDayByViews } from "./weekDaybyViews";
 import { ViewsByTagsCount } from "./viewsByTagsCount";
 import ViewsDiagrams from "../tremor/viewsDiagrams";
 import { DiagramDisplay } from "../tremor/diagramDisplay";
+import { VideoList } from "../research/page";
 
 export default async function Gardening() {
 
@@ -34,10 +35,29 @@ export default async function Gardening() {
                 
                 </div>
             </div>
-            <DiagramDisplay/>
+            <Top10Videos />
             </div>
         </div>
     );
+}
+
+
+async function Top10Videos() {
+    const top10Videos = await db.videos.findMany({
+        orderBy: {
+            viewCount: "desc",
+        },
+        take: 10,
+        where: {
+            NOT: {
+                categoryid: 10
+            }
+        }
+    })
+
+    console.log("Top 10", top10Videos)
+
+    return <VideoList videos={top10Videos} />
 }
 
 export function assertVideos(videos: any): Video[] {

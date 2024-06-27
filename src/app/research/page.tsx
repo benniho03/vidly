@@ -90,7 +90,7 @@ function ResearchResults({ keyword }: { keyword: string }) {
     </div>
 }
 
-function VideoList({ videos }: { videos: Video[] }) {
+export function VideoList({ videos }: { videos: Video[] }) {
     const PAGE_SIZE = 10
     const [page, setPage] = useState(1)
 

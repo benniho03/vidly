@@ -78,7 +78,6 @@ let publishedOn = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 for (const video of videos.videos.videos) {
     const uploadDate = video.publishedAt
-    console.log(video.publishedAt?.getMonth())
     const month = video.publishedAt?.getMonth();
 
 
