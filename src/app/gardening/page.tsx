@@ -19,7 +19,6 @@ export default async function Gardening() {
         <div>
             <div className="hero">
                 <img src="/assets/hero-gardening.jpg" />
-                <img src="/assets/hero-gardening.jpg" />
             </div>
             <div className="container mx-auto px-20">
                 <div className="background mb-20">
@@ -79,10 +78,6 @@ export default async function Gardening() {
                         <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"duration"} /></div>
                     </div>
                 </div>
-                <DiagramDisplay videos={rawVideos} />
-                <NumberFact videos={rawVideos} prop={"title length"} />
-                <NumberFact videos={rawVideos} prop={"description length"} />
-                <NumberFact videos={rawVideos} prop={"duration"} />
                 <DiagramDisplay videos={rawVideos} />
             </div>
         </div>
