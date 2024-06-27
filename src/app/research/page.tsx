@@ -7,6 +7,8 @@ import { EyeIcon, HandThumbUpIcon, ChatBubbleOvalLeftIcon, MagnifyingGlassIcon }
 import { WeekDayByViews } from "../gardening/weekDaybyViews";
 import toast from "react-hot-toast";
 import { VideoTable } from "./_data-table/videoDataTable";
+import { DiagramDisplay } from "../tremor/diagramDisplay";
+import ViewsDiagrams from "../tremor/viewsDiagrams";
 
 export default function ResearchPage() {
 
@@ -78,14 +80,15 @@ function ResearchResults({ keyword }: { keyword: string }) {
     if (error) return <div>Error: {error.message}</div>
     if (!videos || !videos.length) return <div>No videos found</div>
 
+    const videosForDiagram = videos.filter(v => !!v.publishedAt && !!v.viewCount)
+
     return <div>
         <div className="max-w-7xl mx-auto">
             <VideoList videos={videos} />
-            <WeekDayByViews videos={videos.map(video => ({
-                published: video.publishedAt?.toString()!,
-                viewCount: video.viewCount
+            <WeekDayByViews videos={videosForDiagram.map(v => ({
+                published: v.publishedAt!.toISOString(),
+                viewCount: v.viewCount!
             }))} />
-            {/* <VideoTable videos={videos} /> */}
         </div>
     </div>
 }
@@ -95,9 +98,8 @@ function VideoList({ videos }: { videos: Video[] }) {
     const [page, setPage] = useState(1)
 
     return <div className="flex flex-col gap-3">
-
         {[...videos].splice(page * PAGE_SIZE, PAGE_SIZE).map(video => <VideoDisplay video={video} />)}
-        <div className="flex gap-4">
+        <div className="flex gap-4 mx-auto">
             <button onClick={() => setPage(page - 1)}>Previous</button>
             <span>Page {page}</span>
             <button onClick={() => setPage(page + 1)}>Next</button>
@@ -127,12 +129,12 @@ async function getResearchData(keyword: string): Promise<Video[]> {
 }
 
 function VideoDisplay({ video }: { video: Video }) {
-    return <div className="flex gap-2" key={video.id}>
+    return <div className="flex gap-2 " key={video.id}>
         <img src={video.thumbnail!} />
-        <div className="flex flex-col">
-            <a href={`https://www.youtube.com/watch?v=${video.videoId}`} className="text-neutral-50 underline">{video.title}</a>
-            <p className="text-neutral-400">{video.channel}</p>
-            <div className="flex gap-4 text-neutral-300">
+        <div className="flex flex-col justify-around items-start">
+            <p className="p-0 m-0"><a href={`https://www.youtube.com/watch?v=${video.videoId}`} className="text-neutral-800 underline">{video.title}</a></p>
+            <p className="text-neutral-400 p-0 m-0">{video.channel}</p>
+            <div className="flex gap-4 text-neutral-900">
                 <div className="flex gap-1">
                     <EyeIcon className="size-6" />
                     <span>{video.viewCount}</span>
@@ -143,7 +145,7 @@ function VideoDisplay({ video }: { video: Video }) {
                 </div>
                 <div className="flex gap-1">
                     <ChatBubbleOvalLeftIcon className="size-6" />
-                    <p>{video.commentCount}</p>
+                    <span>{video.commentCount}</span>
                 </div>
             </div>
         </div>
