@@ -5,9 +5,9 @@ import { InteractiveScatterPlot } from "~/components/scatter-plot";
 import { DurationDistribution } from "~/components/duration-distribution";
 import ViewsDiagrams from "../tremor/viewsDiagrams";
 import { MultipleTags } from "./multipleTags";
+import { formatNumber } from "~/lib/utils";
 
 export default async function Gardening() {
-
 
     const AMONT_OF_VIDEOS_FOR_DIAGRAMS = 1500
 
@@ -23,7 +23,7 @@ export default async function Gardening() {
         'videoId': v.videoId,
         'tags': v.tags,
         'clicks': v.viewCount
-      }))
+    }))
 
     return (
         <div>
@@ -62,7 +62,7 @@ export default async function Gardening() {
                     </div>
                 </div>
                 <ViewsDiagrams videos={rawVideos} color="green" />
-                <MultipleTags videoTags={videosForTagChart} color="green"/>
+                <MultipleTags videoTags={videosForTagChart} color="green" />
                 <InteractiveScatterPlot videos={rawVideos} color="green" />
                 <DurationDistribution videos={rawVideos} color="green" />
                 <div className="mt-8 mb-8">
@@ -105,7 +105,7 @@ async function Top10Videos() {
                     <div className="video-list-item-content">
                         <p className="video-title">{index + 1}.</p>
                         <p className="video-title">{video.title}</p>
-                        <p className="video-viewcount">View count: {video.viewCount}</p>
+                        <p className="video-viewcount">View count: {formatNumber(video.viewCount!) ?? "N/A"}</p>
                         <p className="video-channel">Channel: {video.channel}</p>
                     </div>
                 </div>

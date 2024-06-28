@@ -167,7 +167,7 @@ export default function ViewsPerMonth({ videos, color }: { videos: Video[], colo
         <BarChart
             index="month"
             data={data}
-            categories={['viewCount', 'videos']}
+            categories={['viewCount']}
             colors={[color, 'transparent']}
             xAxisLabel="Month"
             yAxisLabel="Average viewcount"

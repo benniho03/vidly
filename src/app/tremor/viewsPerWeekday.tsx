@@ -114,7 +114,7 @@ export default function ViewsPerWeekday({ videos, color }: { videos: Video[], co
                 ...d,
                 average: d.viewCount ?? 0 / d.videos
             }))}
-            categories={['average', 'videos']}
+            categories={['average']}
             colors={[color, 'transparent']}
             xAxisLabel="Weekday"
             yAxisLabel="Average viewcount"
