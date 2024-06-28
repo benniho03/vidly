@@ -4,142 +4,138 @@
 
 @import "./gardening.scss";
 
-
 :root {
-    --foreground-rgb: 0, 0, 0;
-    --background-start-rgb: 214, 219, 220;
-    --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
-        --foreground-rgb: 0, 0, 0;
-        --background-start-rgb: 255, 255, 255;
-        --background-end-rgb: 255, 255, 255;
-    }
+  :root {
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 255, 255, 255;
+    --background-end-rgb: 255, 255, 255;
+  }
 }
 
 body {
-    color: rgb(var(--foreground-rgb));
-    background: linear-gradient(to bottom,
-            transparent,
-            rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
-    min-height: 500px;
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  min-height: 500px;
+
+  // Nur weil wenig Zeit
+  @apply overflow-x-hidden;
 }
 
 @layer utilities {
-    .text-balance {
-        text-wrap: balance;
-    }
+  .text-balance {
+    text-wrap: balance;
+  }
 }
 
 h1 {
-    font-size: 5rem;
-    text-transform: uppercase;
-    font-weight: 800;
-
+  font-size: 5rem;
+  text-transform: uppercase;
+  font-weight: 800;
 }
 
 h2 {
-    font-size: 2.5rem;
-    text-transform: uppercase;
-    line-height: 2.5rem;
-    font-weight: 800;
-}
-
-p {
-    margin-top: 2rem;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  line-height: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
 }
 
 button {
-    margin-top: 1.5rem;
+  margin-top: 1.5rem;
 }
 
-
 .background {
-    position: relative;
-    padding-top: 4rem;
-    padding-bottom: 5rem;
-    color: white;
+  position: relative;
+  padding-top: 4rem;
+  padding-bottom: 5rem;
+  color: white;
 
-    .background-bg {
-        bottom: 0;
-        height: 100%;
-        left: 50%;
-        margin-left: -50vw;
-        margin-right: -50vw;
-        position: absolute;
-        right: 50%;
-        top: 0;
-        width: 100vw;
-        z-index: -1;
-
-    }
+  .background-bg {
+    bottom: 0;
+    height: 100%;
+    left: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    position: absolute;
+    right: 50%;
+    top: 0;
+    width: 100vw;
+    z-index: -1;
+  }
 }
 
 .pictures {
-    justify-content: space-between;
-    align-items: baseline;
-    position: relative;
-    bottom: -10rem;
-    margin-top: -4rem;
+  justify-content: space-between;
+  align-items: baseline;
+  position: relative;
+  bottom: -10rem;
+  margin-top: -4rem;
 
+  .picture-one {
+    width: 35%;
+  }
 
-    .picture-one {
-        width: 35%;
+  .picture-two {
+    width: 50%;
+    height: 80%;
+
+    img {
+      object-fit: cover;
     }
-
-    .picture-two {
-        width: 50%;
-        height: 80%;
-
-        img {
-            object-fit: cover;
-        }
-    }
+  }
 }
 
 .two-column {
-    justify-content: space-between;
-    align-items: center;
+  justify-content: space-between;
+  align-items: center;
 
-    .column-one {
-        padding-right: 4rem;
-        width: 60%;
-    }
+  .column-one {
+    padding-right: 4rem;
+    width: 60%;
+  }
 
-    .column-two {
-        width: 30%;
-        height: 80%;
-    }
+  .column-two {
+    width: 30%;
+    height: 80%;
+  }
 }
 
 .ki-form {
-    margin-top: 10rem;
-    margin-bottom: 3rem;
-
+  margin-top: 10rem;
+  margin-bottom: 3rem;
 }
 
 .searchform {
-    margin-top: 10rem;
-    margin-bottom: 3rem;
+  margin-top: 10rem;
+  margin-bottom: 3rem;
 }
 
 .keyfacts {
-    margin-top: 9rem;
-    .number-facts {
-        .number-facts-item {
-            text-align: center;
+  margin-top: 9rem;
+  .number-facts {
+    .number-facts-item {
+      text-align: center;
 
-            .content {
-                font-weight: 800;
-                font-size: 4rem;
-            }
+      .content {
+        font-weight: 800;
+        font-size: 4rem;
+      }
 
-            .content-title {
-                margin-top: 0px;
-            }
-        }
-
+      .content-title {
+        margin-top: 0px;
+      }
     }
+  }
 }
