@@ -1,4 +1,41 @@
+import { formatNumber } from "~/lib/utils";
 import { Video } from "../data-mining/youtube/videos";
+
+type AverageOptions = "likeCount" | "commentCount" | "duration" | "viewCount" | "titlecharlength" | "descriptioncharlength";
+
+export function AverageNumberDisplay({ videos, property }: { videos: Video[], property: AverageOptions }) {
+    const average = videos.reduce((acc, video) => {
+        if (!video[property]) {
+            return acc
+        }
+        return acc + Number(video[property]!) ?? 0;
+    }, 0) / videos.length;
+
+    return (
+        <>
+            <p className="content">{formatNumber(average)}</p >
+            <p className="content-title">⌀ {getPropertyDisplay(property)}</p>
+        </>
+    )
+}
+
+function getPropertyDisplay(property: AverageOptions) {
+
+    switch (property) {
+        case "likeCount":
+            return "Likes";
+        case "commentCount":
+            return "Comments";
+        case "duration":
+            return "Duration in seconds";
+        case "viewCount":
+            return "Views";
+        case "titlecharlength":
+            return "Title Character Length";
+        case "descriptioncharlength":
+            return "Description Character Length";
+    }
+}
 
 export function NumberFact({ videos, prop }: { videos: any[], prop: String, }) {
     let sum = 0;
@@ -52,8 +89,6 @@ export function NumberFact({ videos, prop }: { videos: any[], prop: String, }) {
         <>
             <p className="content">{average}</p >
             <p className="content-title">⌀ {prop}</p>
-
-
         </>
     )
 }

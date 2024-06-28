@@ -299,7 +299,7 @@ export default function ViewsPerHour({ videos, color }: { videos: Video[], color
         <BarChart
             index="hour"
             data={data}
-            categories={['viewCount', 'videos']}
+            categories={['viewCount']}
             colors={[color, 'transparent']}
             xAxisLabel="Hour"
             yAxisLabel="Average viewcount"

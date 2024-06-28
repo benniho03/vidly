@@ -110,8 +110,11 @@ export default function ViewsPerWeekday({ videos, color }: { videos: Video[], co
     return <>
         <BarChart
             index="weekday"
-            data={data}
-            categories={['viewCount', 'videos']}
+            data={data.map(d => ({
+                ...d,
+                average: d.viewCount ?? 0 / d.videos
+            }))}
+            categories={['average']}
             colors={[color, 'transparent']}
             xAxisLabel="Weekday"
             yAxisLabel="Average viewcount"

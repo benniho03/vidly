@@ -1,6 +1,6 @@
 "use client";
 
-import { BarChart, BarList, Card } from "@tremor/react";
+import { BarList, type Color } from "@tremor/react";
 
 interface TagCount {
   name: string;
@@ -17,11 +17,10 @@ export function MultipleTags({
     tags: string[] | null;
     clicks: number | null;
   }[],
-  color: string
+  color: Color
 }) {
   let allTags: string[] = [];
   videos.map((video) => {
-    console.log(video.tags);
     if (video.tags === null || video.tags.length === 0) return;
     video.tags.map((tag) => {
       allTags.push(tag);
