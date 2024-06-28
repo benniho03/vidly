@@ -63,7 +63,6 @@ export function MultipleTags({
 
   return (
     <>
-      <h3>Top 10 Tags for your research</h3>
       <p className="mt-4 text-tremor-default flex items-center justify-between text-tremor-content dark:text-dark-tremor-content">
         <span>Tagname</span>
         <span>Count</span>

@@ -10,15 +10,13 @@ import { MultipleTags } from "./multipleTags";
 
 export default async function Gardening() {
 
-    const rawVideos = await db.videos.findMany({
-        take: 100
-    });
+    const rawVideos = await db.videos.findMany();
     const videos = assertVideos(rawVideos);
     const videosForTagChart = videos.map(v => ({
         'videoId': v.videoId,
         'tags': v.tags,
         'clicks': v.viewCount
-      }))
+    }))
 
     return (
         <div>
@@ -45,26 +43,29 @@ export default async function Gardening() {
                 <div className="keyfacts mt-8">
                     <h2>Key facts</h2>
                     <div className="number-facts grid grid-cols-3 gap-4">
-
                         <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"video count"} /></div>
                         <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"duration"} /></div>
                         <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"views"} /></div>
                     </div>
-                </div>
-                <div className="keyfacts">
-                    <h2>Key facts</h2>
-                    <div className="number-facts grid grid-cols-3 gap-4">
+                    <div className="number-facts grid grid-cols-3 gap-4 mt-4">
                         <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"title length"} /></div>
                         <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"description length"} /></div>
                         <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"duration"} /></div>
                     </div>
                 </div>
                 <ViewsDiagrams videos={rawVideos} color="green" />
-                <MultipleTags videoTags={videosForTagChart} color="green"/>
+                <h2>TOP 10 TAGS</h2>
+                <p>Find out which tags are used for most of the gardening videos. Use ist as inspiration to reach a bigger crowd.</p>
+                <MultipleTags videoTags={videosForTagChart} color="green" />
+                <h2 className="mt-8">INTERACTIVE SCATTER PLOT</h2>
+                <p className="mb-4">Use our scatter plot to finde correlations between the view count, the like count, the comment count and duration. Optimize the lenght of your videos to achieve your main goal! </p>
                 <InteractiveScatterPlot videos={rawVideos} color="green" />
+                <h2>DURATION OF GARDENING VIDEOS</h2>
+                <p>Take a closer look at the duration of other gardening videos. Which is the current trend? Use it to optimize the length of your videos even further.</p>
                 <DurationDistribution videos={rawVideos} color="green" />
                 <div className="mt-8 mb-8">
-                    <h2>Top 10 videos</h2>
+                    <h2>Top 10  gardening videos</h2>
+                    <p>Here you can see a list of the current most popular gardening videos. Find out what the have in common and make use of it.</p>
                     <div className="video-list grid grid-cols-2 gap-x-4 gap-y-8">
                         <Top10Videos />
                     </div>
@@ -80,6 +81,7 @@ async function Top10Videos() {
             viewCount: "desc",
         },
         take: 10,
+        skip: 1,
         distinct: "videoId",
         where: {
             NOT: {
@@ -90,12 +92,33 @@ async function Top10Videos() {
             }
         }
     })
+    const channelIds = top10Videos.filter((video) => {
+        return !!video.channel
+    }).map((video) => {
+        return video.channel
+    }) as string[]
+
+    const top10Channels = await db.channels.findMany({
+        take: 10,
+        where: {
+            OR: [
+                { id: { contains: channelIds[0] } },
+                { id: { contains: channelIds[1] } },
+                { id: { contains: channelIds[2] } },
+                { id: { contains: channelIds[3] } },
+                { id: { contains: channelIds[4] } },
+                { id: { contains: channelIds[5] } },
+                { id: { contains: channelIds[6] } },
+                { id: { contains: channelIds[7] } },
+                { id: { contains: channelIds[8] } },
+                { id: { contains: channelIds[9] } },
+            ]
+        }
+    })
 
     return (
         top10Videos.map((video, index) => {
             return <>
-
-
                 <div className="video-list-item grid grid-cols-2 gap-4 items-center">
                     <div className="video-list-item-image">
                         <img src={video.thumbnail!} width="100%" />
@@ -104,7 +127,7 @@ async function Top10Videos() {
                         <p className="video-title">{index + 1}.</p>
                         <p className="video-title">{video.title}</p>
                         <p className="video-viewcount">View count: {video.viewCount}</p>
-                        <p className="video-channel">Channel: {video.channel}</p>
+                        <p className="video-channel">Channel: {top10Channels[index]!.title}</p>
                     </div>
                 </div>
 
