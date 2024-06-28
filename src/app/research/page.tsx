@@ -10,10 +10,12 @@ import { VideoTable } from "./_data-table/videoDataTable";
 import { DiagramDisplay } from "../tremor/diagramDisplay";
 import ViewsDiagrams from "../tremor/viewsDiagrams";
 import { MultipleTags } from "../gardening/multipleTags";
+import { InteractiveScatterPlot } from "~/components/scatter-plot";
+import { LoadingSpinner } from "../_components/loadingSpinner";
 
 export default function ResearchPage() {
 
-    const [keyword, setKeyword] = useState(getKeyword())
+    const [keyword, setKeyword] = useState("")
 
     return <>
         <div>
@@ -42,9 +44,9 @@ export default function ResearchPage() {
                     <p className="mb-8">Enter a search term of your choice and view the results.</p>
                     <form
                         action={updateKeyword}
-                        className="max-w-7xl mx-auto flex items-center justify-center gap-2 my-3"
+                        className="mx-auto flex items-center justify-center gap-2 my-3"
                     >
-                        <input type="text" name="keyword" placeholder="Type your keyword" className="text-neutral-900 w-full px-2 py-4" />
+                        <input type="text" name="keyword" placeholder="Type your keyword" className="text-neutral-900 w-full px-2 py-4 text-2xl" />
                         <button
                             type="submit"
                             className="m-0 flex gap-1 items-center"
@@ -77,7 +79,7 @@ function ResearchResults({ keyword }: { keyword: string }) {
         queryFn: () => getResearchData(keyword)
     })
 
-    if (isLoading) return <div>Loading...</div>
+    if (isLoading) return <div className="w-full flex items-center mx-auto"><LoadingSpinner /></div>
     if (error) return <div>Error: {error.message}</div>
     if (!videos || !videos.length) return <div>No videos found</div>
 
@@ -96,6 +98,7 @@ function ResearchResults({ keyword }: { keyword: string }) {
                 viewCount: v.viewCount!
             }))} />
             <MultipleTags videoTags={videosForMultipleTags}/>
+            <InteractiveScatterPlot videos={videos} color="gray" />
         </div>
     </div>
 }
@@ -104,22 +107,21 @@ function VideoList({ videos }: { videos: Video[] }) {
     const PAGE_SIZE = 10
     const [page, setPage] = useState(1)
 
+    const videoPage = [...videos].splice(page * PAGE_SIZE, PAGE_SIZE)
+
+    if (!videoPage.length) return <div className=" flex flex-col items-center">
+        <p className="text-center">That's all</p>
+        <button onClick={() => setPage(1)}>Back to the beginning</button>
+    </div>
+
     return <div className="flex flex-col gap-3">
-        {[...videos].splice(page * PAGE_SIZE, PAGE_SIZE).map(video => <VideoDisplay video={video} />)}
+        {videoPage.map(video => <VideoDisplay video={video} />)}
         <div className="flex gap-4 mx-auto">
             <button onClick={() => setPage(page - 1)}>Previous</button>
             <span>Page {page}</span>
             <button onClick={() => setPage(page + 1)}>Next</button>
         </div>
     </div>
-}
-
-function getKeyword() {
-    const searchParams = useSearchParams()
-    const keywordParam = searchParams.get("keyword")
-    if (typeof keywordParam !== "string")
-        return
-    return decodeURIComponent(keywordParam)
 }
 
 async function getResearchData(keyword: string): Promise<Video[]> {

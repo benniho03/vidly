@@ -1,13 +1,14 @@
 "use client"
-import { Card } from '@tremor/react';
+import { type Color } from '@tremor/react';
 import { useState } from "react";
 import ViewsPerWeekday from './viewsPerWeekday';
 import ViewsPerMonth from './viewsPerMonth';
 import ViewsPerHour from './viewsPerHour';
+import { Video } from '../data-mining/youtube/videos';
 
 type DateOptions = "month" | "hour" | "day"
 
-export default function ViewsDiagrams(videos: any) {
+export default function ViewsDiagrams({ videos, color }: { videos: Video[], color: Color }) {
     const [dateType, setDateType] = useState<DateOptions>("day")
     return <div className="timebased-data">
         <h2 className="mt-8">Timebased Data</h2>
@@ -22,9 +23,9 @@ export default function ViewsDiagrams(videos: any) {
             <option className="text-neutral-900" value="hour">Hour</option>
         </select>
 
-        {dateType == "day" ? <ViewsPerWeekday videos={videos} /> : ""}
-        {dateType == "month" ? <ViewsPerMonth videos={videos} /> : ""}
-        {dateType == "hour" ? <ViewsPerHour videos={videos} /> : ""}
+        {dateType === "day" ? <ViewsPerWeekday videos={videos} color={color} /> : ""}
+        {dateType === "month" ? <ViewsPerMonth videos={videos} color={color} /> : ""}
+        {dateType === "hour" ? <ViewsPerHour videos={videos} color={color} /> : ""}
 
     </div>
 }

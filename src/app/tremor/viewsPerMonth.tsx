@@ -1,6 +1,7 @@
-import { Card } from '@tremor/react';
+import { type Color } from '@tremor/react';
 import { BarChart } from '@tremor/react';
 import { db } from '~/server/db';
+import { Video } from '../data-mining/youtube/videos';
 
 type ViewsPerMonth = {
     "viewCount": number | null,
@@ -8,9 +9,8 @@ type ViewsPerMonth = {
     "videos": number
 }
 
-export default function ViewsPerMonth(videos: any) {
+export default function ViewsPerMonth({ videos, color }: { videos: Video[], color: Color }) {
 
-    console.log(videos.length)
 
     const data: ViewsPerMonth[] = [{
         viewCount: 0,
@@ -75,12 +75,9 @@ export default function ViewsPerMonth(videos: any) {
 
     let publishedOn = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-    for (const video of videos.videos.videos.videos) {
+    for (const video of videos) {
         const uploadDate = video.publishedAt
-        console.log(video.publishedAt?.getMonth())
         const month = video.publishedAt?.getMonth();
-
-
 
         switch (month) {
             case 0:
@@ -171,7 +168,7 @@ export default function ViewsPerMonth(videos: any) {
             index="month"
             data={data}
             categories={['viewCount', 'videos']}
-            colors={['lime', 'transparent']}
+            colors={[color, 'transparent']}
             xAxisLabel="Month"
             yAxisLabel="Average viewcount"
             showLegend={false}
