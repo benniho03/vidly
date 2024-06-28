@@ -27,13 +27,13 @@ function getPropertyDisplay(property: AverageOptions) {
         case "commentCount":
             return "Comments";
         case "duration":
-            return "Duration";
+            return "Duration in seconds";
         case "viewCount":
             return "Views";
         case "titlecharlength":
-            return "Title Length";
+            return "Title Character Length";
         case "descriptioncharlength":
-            return "Description Length";
+            return "Description Character Length";
     }
 }
 

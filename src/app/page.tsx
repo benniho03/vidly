@@ -1,4 +1,5 @@
 import { Card } from '@tremor/react';
+import { formatNumber } from '~/lib/utils';
 
 export default function Home() {
   return (
@@ -13,23 +14,22 @@ export default function Home() {
           <h2>EVERYBODY KNOWS HIM</h2>
           <h2>SOME FEAR HIM</h2>
           <h2 >HARDLY ANYONE UNDERSTANDS HIM</h2>
-          <p mt-10>The profession of content creator has become much more popular in recent years, with many more videos appearing on the YouTube platform every day than just a few years ago. Creators, who earn their living from the platform, are heavily dependent on the clicks on their videos, but due to the increased competition and the algorithm used by YouTube, it is becoming increasingly difficult to get many users interested in your own video.</p>
+          <p className='mt-10'>The profession of content creator has become much more popular in recent years, with many more videos appearing on the YouTube platform every day than just a few years ago. Creators, who earn their living from the platform, are heavily dependent on the clicks on their videos, but due to the increased competition and the algorithm used by YouTube, it is becoming increasingly difficult to get many users interested in your own video.</p>
           <div className="keyfacts">
             <div className="number-facts grid grid-cols-3 gap-4">
 
               <div className="number-facts-item">
-                <p className="content">2,491 Bn.</p >
+                <p className="content">{formatNumber(2491000000)}</p >
                 <p className="content-title">users</p>
                 <p className='content-small'>per month</p>
               </div>
               <div className="number-facts-item">
-                <p className="content">720.000</p >
+                <p className="content">{formatNumber(720000)}</p >
                 <p className="content-title">hours</p>
                 <p className='content-small'>Videomaterial per day</p>
               </div>
               <div className="number-facts-item">
-                <p className="content">300 Mio.</p >
-                <p className="content-title">dollar </p>
+                <p className="content">${formatNumber(300000000)}</p>
                 <p className='content-small'>were generated in advertising revenue from all YouTube combined in 2021</p>
               </div>
             </div>
