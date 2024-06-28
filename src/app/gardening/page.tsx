@@ -9,18 +9,15 @@ import { formatNumber } from "~/lib/utils";
 
 export default async function Gardening() {
 
-    const AMONT_OF_VIDEOS_FOR_DIAGRAMS = 1500
+    const AMONT_OF_VIDEOS_FOR_DIAGRAMS = 1000
 
     const videosForDiagram = await db.videos.findMany({
         take: AMONT_OF_VIDEOS_FOR_DIAGRAMS
     })
 
-    const rawVideos = await db.videos.findMany({
-        take: 100
-    });
+    const rawVideos = await db.videos.findMany();
 
-    const videos = assertVideos(rawVideos);
-    const videosForTagChart = videos.map(v => ({
+    const videosForTagChart = videosForDiagram.map(v => ({
         'videoId': v.videoId,
         'tags': v.tags,
         'clicks': v.viewCount
@@ -48,31 +45,36 @@ export default async function Gardening() {
                 </div>
                 <div className="keyfacts">
                     <h2>Key Statistics</h2>
-                    <div className="number-facts-item"><AverageNumberDisplay videos={rawVideos} property="viewCount" /></div>
-                    <div className="number-facts-item"><AverageNumberDisplay videos={rawVideos} property="likeCount" /></div>
-                    <div className="number-facts-item"><AverageNumberDisplay videos={rawVideos} property="commentCount" /></div>
+                    <div className="number-facts grid grid-cols-3 gap-4">
+                        <div className="number-facts-item"><AverageNumberDisplay videos={rawVideos} property="viewCount" /></div>
+                        <div className="number-facts-item"><AverageNumberDisplay videos={rawVideos} property="likeCount" /></div>
+                        <div className="number-facts-item"><AverageNumberDisplay videos={rawVideos} property="commentCount" /></div>
+                    </div>
                 </div>
-                <div className="number-facts grid grid-cols-3 gap-4 mt-4">
-                    <div className="number-facts-item"><AverageNumberDisplay videos={rawVideos} property="duration" /></div>
-                    <div className="number-facts-item"><AverageNumberDisplay videos={rawVideos} property="titlecharlength" /></div>
-                    <div className="number-facts-item"><AverageNumberDisplay videos={rawVideos} property="descriptioncharlength" /></div>
+                <ViewsDiagrams videos={videosForDiagram} color="green" />
+                <div className="keyfacts">
+                    <h2>Other interesting numbers</h2>
+                    <div className="number-facts grid grid-cols-3 gap-4 mt-4">
+                        <div className="number-facts-item"><AverageNumberDisplay videos={rawVideos} property="duration" /></div>
+                        <div className="number-facts-item"><AverageNumberDisplay videos={rawVideos} property="titlecharlength" /></div>
+                        <div className="number-facts-item"><AverageNumberDisplay videos={rawVideos} property="descriptioncharlength" /></div>
+                    </div>
                 </div>
-            </div>
-            <ViewsDiagrams videos={rawVideos} color="green" />
-            <h2>TOP 10 TAGS</h2>
-            <p>Find out which tags are used for most of the gardening videos. Use ist as inspiration to reach a bigger crowd.</p>
-            <MultipleTags videoTags={videosForTagChart} color="green" />
-            <h2 className="mt-8">INTERACTIVE SCATTER PLOT</h2>
-            <p className="mb-4">Use our scatter plot to finde correlations between the view count, the like count, the comment count and duration. Optimize the lenght of your videos to achieve your main goal! </p>
-            <InteractiveScatterPlot videos={rawVideos} color="green" />
-            <h2>DURATION OF GARDENING VIDEOS</h2>
-            <p>Take a closer look at the duration of other gardening videos. Which is the current trend? Use it to optimize the length of your videos even further.</p>
-            <DurationDistribution videos={rawVideos} color="green" />
-            <div className="mt-8 mb-8">
-                <h2>Top 10  gardening videos</h2>
-                <p>Here you can see a list of the current most popular gardening videos. Find out what the have in common and make use of it.</p>
-                <div className="video-list grid grid-cols-2 gap-x-4 gap-y-8">
-                    <Top10Videos />
+                <h2>TOP 10 TAGS</h2>
+                <p>Find out which tags are used for most of the gardening videos. Use ist as inspiration to reach a bigger crowd.</p>
+                <MultipleTags videoTags={videosForTagChart} color="green" />
+                <h2 className="mt-8">INTERACTIVE SCATTER PLOT</h2>
+                <p className="mb-4">Use our scatter plot to finde correlations between the view count, the like count, the comment count and duration. Optimize the lenght of your videos to achieve your main goal! </p>
+                <InteractiveScatterPlot videos={videosForDiagram} color="green" />
+                <h2>DURATION OF GARDENING VIDEOS</h2>
+                <p>Take a closer look at the duration of other gardening videos. Which is the current trend? Use it to optimize the length of your videos even further.</p>
+                <DurationDistribution videos={videosForDiagram} color="green" />
+                <div className="mt-8 mb-8">
+                    <h2>Top 10  gardening videos</h2>
+                    <p>Here you can see a list of the current most popular gardening videos. Find out what the have in common and make use of it.</p>
+                    <div className="video-list grid grid-cols-2 gap-x-4 gap-y-8">
+                        <Top10Videos />
+                    </div>
                 </div>
             </div>
         </div>
