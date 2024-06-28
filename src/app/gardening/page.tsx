@@ -7,7 +7,8 @@ import { ViewsByTagsCount } from "./viewsByTagsCount";
 import ViewsDiagrams from "../tremor/viewsDiagrams";
 import { DiagramDisplay } from "../tremor/diagramDisplay";
 import { NumberFact } from "./numberFact";
-import ScatterPlot from "~/components/scatter-plot";
+import ScatterPlot, { InteractiveScatterPlot } from "~/components/scatter-plot";
+import { DurationDistribution } from "~/components/duration-distribution";
 
 export default async function Gardening() {
 
@@ -18,7 +19,6 @@ export default async function Gardening() {
 
     return (
         <div>
-            <ScatterPlot videos={videos} axis1="viewCount" axis2="duration"/>
             <div className="hero">
                 <img src="/assets/hero-gardening.jpg" />
             </div>
@@ -88,13 +88,14 @@ export default async function Gardening() {
                         <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"duration"} /></div>
                     </div>
                 </div>
-
                 <div className="mt-8 mb-8">
                     <h2>Top 10 videos</h2>
                     <div className="video-list grid grid-cols-2 gap-x-4 gap-y-8">
                         <Top10Videos />
                     </div>
                 </div>
+                <InteractiveScatterPlot videos={rawVideos} />
+                <DurationDistribution videos={rawVideos} />
             </div>
         </div>
     );

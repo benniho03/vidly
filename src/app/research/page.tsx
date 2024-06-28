@@ -6,9 +6,7 @@ import { Video } from "../data-mining/youtube/videos";
 import { EyeIcon, HandThumbUpIcon, ChatBubbleOvalLeftIcon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { WeekDayByViews } from "../gardening/weekDaybyViews";
 import toast from "react-hot-toast";
-import { VideoTable } from "./_data-table/videoDataTable";
-import { DiagramDisplay } from "../tremor/diagramDisplay";
-import ViewsDiagrams from "../tremor/viewsDiagrams";
+import { InteractiveScatterPlot } from "~/components/scatter-plot";
 
 export default function ResearchPage() {
 
@@ -89,6 +87,7 @@ function ResearchResults({ keyword }: { keyword: string }) {
                 published: v.publishedAt!.toISOString(),
                 viewCount: v.viewCount!
             }))} />
+            <InteractiveScatterPlot videos={videos} />
         </div>
     </div>
 }
