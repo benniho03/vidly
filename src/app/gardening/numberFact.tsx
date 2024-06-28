@@ -1,3 +1,4 @@
+import { formatNumber } from "~/lib/utils";
 import { Video } from "../data-mining/youtube/videos";
 
 type AverageOptions = "likeCount" | "commentCount" | "duration" | "viewCount" | "titlecharlength" | "descriptioncharlength";
@@ -7,13 +8,12 @@ export function AverageNumberDisplay({ videos, property }: { videos: Video[], pr
         if (!video[property]) {
             return acc
         }
-        console.log(video[property]!)
         return acc + Number(video[property]!) ?? 0;
     }, 0) / videos.length;
 
     return (
         <>
-            <p className="content">{average.toFixed(0)}</p >
+            <p className="content">{formatNumber(average)}</p >
             <p className="content-title">⌀ {getPropertyDisplay(property)}</p>
         </>
     )

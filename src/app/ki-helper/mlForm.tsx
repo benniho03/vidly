@@ -10,6 +10,7 @@ type MLResults = {
 
 import { useState } from "react";
 import { LoadingSpinner } from "../_components/loadingSpinner";
+import { formatNumber } from '~/lib/utils';
 
 export function MachineLearningForm() {
 
@@ -120,19 +121,19 @@ function Result({ result, isLoading, title, handle }: { result: MLResults | null
         <div className="flex w-4/5 mx-auto gap-2 justify-between">
             <div className="flex gap-2 p-4 justify-center items-center">
                 <ScaleIcon className='w-8 h-8' />
-                <p className='mt-0'>{result.probability}%</p>
+                <p className='mt-0'>{formatNumber(result.probability)}%</p>
             </div>
             <div className="flex gap-2 justify-center items-center">
                 <ChatBubbleLeftIcon className='w-8 h-8' />
-                <p className='mt-0'>{result.comments}</p>
+                <p className='mt-0'>{formatNumber(result.comments)}</p>
             </div>
             <div className="flex gap-2 justify-center items-center">
                 <HandThumbUpIcon className='w-8 h-8' />
-                <p className='mt-0'>{result.likes}</p>
+                <p className='mt-0'>{formatNumber(result.likes)}</p>
             </div>
             <div className="flex gap-2 justify-center items-center">
                 <EyeIcon className='w-8 h-8' />
-                <p className='mt-0'>{result.views}</p>
+                <p className='mt-0'>{formatNumber(result.views)}</p>
             </div>
         </div>
     </>
