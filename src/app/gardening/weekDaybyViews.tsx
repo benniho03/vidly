@@ -1,6 +1,6 @@
 "use client"
 import { Video } from "~/app/data-mining/youtube/videos"
-import { LineChart } from "@tremor/react"
+import { BarChart } from "@tremor/react"
 import { useState } from "react"
 
 type DateOptions = "years" | "year" | "month" | "week" | "day"
@@ -22,7 +22,7 @@ export function WeekDayByViews({ videos }: { videos: { published: string | null,
             <option className="text-neutral-900" value="year">Year</option>
             <option className="text-neutral-900" value="years">Years</option>
         </select>
-        <LineChart
+        <BarChart
             index="date"
             data={data}
             categories={["viewCount"]}
