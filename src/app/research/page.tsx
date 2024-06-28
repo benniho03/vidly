@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { VideoTable } from "./_data-table/videoDataTable";
 import { DiagramDisplay } from "../tremor/diagramDisplay";
 import ViewsDiagrams from "../tremor/viewsDiagrams";
+import { MultipleTags } from "../gardening/multipleTags";
 
 export default function ResearchPage() {
 
@@ -81,6 +82,11 @@ function ResearchResults({ keyword }: { keyword: string }) {
     if (!videos || !videos.length) return <div>No videos found</div>
 
     const videosForDiagram = videos.filter(v => !!v.publishedAt && !!v.viewCount)
+    const videosForMultipleTags = videos.map(v => ({
+        videoId: v.videoId,
+        tags: v.tags,
+        clicks: v.viewCount
+    }));
 
     return <div>
         <div className="max-w-7xl mx-auto">
@@ -89,6 +95,7 @@ function ResearchResults({ keyword }: { keyword: string }) {
                 published: v.publishedAt!.toISOString(),
                 viewCount: v.viewCount!
             }))} />
+            <MultipleTags videoTags={videosForMultipleTags}/>
         </div>
     </div>
 }
