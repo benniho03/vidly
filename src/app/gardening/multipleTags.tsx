@@ -1,5 +1,8 @@
 "use client";
 
+import { BarChart, BarList, Card } from '@tremor/react';
+import { gray } from 'tailwindcss/colors';
+
 interface TagCount {
   name: string;
   count: number;
@@ -52,11 +55,21 @@ export function MultipleTags({
 
   const topTags = tagCounts.sort((a, b) => b.count - a.count).splice(0, 10);
 
-  return (
-    <>
-      {
-        topTags.map(tag => <p>{tag.name}: {tag.count}, {tag.totalClicks}</p>)
-      }
-    </>
+  const dataForChart = topTags.map(t => ({
+    'name': t.name,
+    'value': t.count
+  }))
+
+  return (<>
+      <h3>Top 10 Tags for your research</h3>
+      <p className="mt-4 text-tremor-default flex items-center justify-between text-tremor-content dark:text-dark-tremor-content">
+        <span>Tagname</span>
+        <span>Count</span>
+      </p>
+      <BarList
+        data={dataForChart}
+        color={'gray'}
+      /> 
+  </>
   );
 }
