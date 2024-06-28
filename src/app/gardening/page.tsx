@@ -1,14 +1,11 @@
 import { db } from "~/server/db";
 import { AmountOfVideosByCategory } from "./numberVideosByCategory";
 import { Video } from "../data-mining/youtube/videos";
-import { ViewsByCategory } from "./viewsByCategory";
-import { WeekDayByViews } from "./weekDaybyViews";
-import { ViewsByTagsCount } from "./viewsByTagsCount";
-import ViewsDiagrams from "../tremor/viewsDiagrams";
 import { DiagramDisplay } from "../tremor/diagramDisplay";
 import { NumberFact } from "./numberFact";
 import ScatterPlot, { InteractiveScatterPlot } from "~/components/scatter-plot";
 import { DurationDistribution } from "~/components/duration-distribution";
+import ViewsDiagrams from "../tremor/viewsDiagrams";
 
 export default async function Gardening() {
 
@@ -47,9 +44,9 @@ export default async function Gardening() {
                         <div className="number-facts-item"><NumberFact videos={rawVideos} prop={"duration"} /></div>
                     </div>
                 </div>
-                <DiagramDisplay videos={rawVideos} />
-                <InteractiveScatterPlot videos={rawVideos} />
-                <DurationDistribution videos={rawVideos} />
+                <ViewsDiagrams videos={rawVideos} color="green" />
+                <InteractiveScatterPlot videos={rawVideos} color="green" />
+                <DurationDistribution videos={rawVideos} color="green" />
             </div>
         </div>
     );

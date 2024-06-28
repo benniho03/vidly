@@ -1,13 +1,17 @@
 
+import { db } from "~/server/db";
 import { DiagramDisplay } from "./diagramDisplay";
-import ViewsDiagrams from "./viewsDiagrams";
 
 
-export default function Tremor() {
+export default async function Tremor() {
+
+    const videos = await db.videos.findMany({
+        take: 5000
+    })
 
     return (
         <div>
-            <DiagramDisplay/>
+            <DiagramDisplay videos={videos} />
         </div>
     );
 }

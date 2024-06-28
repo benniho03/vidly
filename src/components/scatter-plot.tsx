@@ -3,7 +3,7 @@ import { ScatterChart, Card, type Color } from "@tremor/react";
 import { useState } from "react";
 import { Video } from "~/app/data-mining/youtube/videos";
 
-export default function ScatterPlot({ videos, xAxis, yAxis }: { videos: Video[], xAxis: keyof Video, yAxis: keyof Video }) {
+export default function ScatterPlot({ videos, xAxis, yAxis, color }: { videos: Video[], xAxis: keyof Video, yAxis: keyof Video, color: Color }) {
 
 
     return (
@@ -20,7 +20,7 @@ export default function ScatterPlot({ videos, xAxis, yAxis }: { videos: Video[],
                 showOpacity={true}
                 minYValue={60}
                 enableLegendSlider
-                colors={["sky"]}
+                colors={[color]}
                 showLegend={false}
             />
         </div>
@@ -28,12 +28,12 @@ export default function ScatterPlot({ videos, xAxis, yAxis }: { videos: Video[],
 
 }
 
-export function InteractiveScatterPlot({ videos }: { videos: Video[] }) {
+export function InteractiveScatterPlot({ videos, color }: { videos: Video[], color: Color }) {
     const [xAxis, setXAxis] = useState("viewCount")
     const [yAxis, setYAxis] = useState("duration")
 
     return (
-        <div className="max-w-6xl mx-auto">
+        <div className="mx-auto">
             <div className="flex justify-center gap-4 mx-auto">
                 <select
                     value={xAxis}
@@ -56,7 +56,7 @@ export function InteractiveScatterPlot({ videos }: { videos: Video[] }) {
                     <option className="text-neutral-900" value="duration">Duration</option>
                 </select>
             </div>
-            <ScatterPlot videos={videos} xAxis={xAxis as keyof Video} yAxis={yAxis as keyof Video} />
+            <ScatterPlot videos={videos} xAxis={xAxis as keyof Video} yAxis={yAxis as keyof Video} color={color} />
         </div>
     )
 }
