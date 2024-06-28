@@ -65,8 +65,9 @@ export default async function queryVideos() {
     console.log("Created " + count + " videos")
 
     const channelIds = [...new Set(videos.map(video => video.channel))]
+    const channelIdsSanitized = channelIds.filter(id => id !== undefined) as string[]
 
-    await createChannelData(channelIds)
+    await createChannelData(channelIdsSanitized)
 
 }
 await queryVideos()

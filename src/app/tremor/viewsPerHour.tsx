@@ -1,6 +1,7 @@
-import { Card } from '@tremor/react';
-import { LineChart } from '@tremor/react';
+import { Card, Color } from '@tremor/react';
+import { BarChart } from '@tremor/react';
 import { db } from '~/server/db';
+import { Video } from '../data-mining/youtube/videos';
 
 type ViewsPerHour = {
     "viewCount": number | null,
@@ -8,7 +9,7 @@ type ViewsPerHour = {
     "videos": number
 }
 
-export default function ViewsPerHour(videos: any) {
+export default function ViewsPerHour({ videos, color }: { videos: Video[], color: Color }) {
 
 
     const data: ViewsPerHour[] = [{
@@ -135,12 +136,9 @@ export default function ViewsPerHour(videos: any) {
     let publishedOn = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 
-    for (const video of videos.videos.videos) {
+    for (const video of videos) {
         const uploadDate = video.publishedAt
-        console.log(video.publishedAt?.getHours())
         const hour = video.publishedAt?.getHours();
-
-
 
         switch (hour) {
             case 0:
@@ -289,7 +287,6 @@ export default function ViewsPerHour(videos: any) {
         }
     }
 
-
     publishedOn.forEach((uploadsPerHour, index) => {
         const viewCount = data[index]?.viewCount
         if (data[index] && viewCount != null && viewCount != undefined) {
@@ -299,11 +296,11 @@ export default function ViewsPerHour(videos: any) {
     });
 
     return <>
-        <LineChart
+        <BarChart
             index="hour"
             data={data}
             categories={['viewCount', 'videos']}
-            colors={['lime', 'transparent']}
+            colors={[color, 'transparent']}
             xAxisLabel="Hour"
             yAxisLabel="Average viewcount"
             showLegend={false}

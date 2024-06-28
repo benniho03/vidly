@@ -3,25 +3,7 @@ import { iso8601ToSeconds } from "../helpers/duration-parser"
 import { getCalculatedFields } from "~/scripts/calculated-fields"
 import { fetchVideoIds } from "./search"
 
-export type Video = {
-    id: string
-    videoId: string | null
-    title: string
-    thumbnail: string
-    description: string
-    channel: string
-    likeCount: number
-    commentCount: number
-    viewCount: number
-    duration: number
-    publishedAt: string | Date
-    caption: string
-    tags: string[]
-    categoryid: number
-    topicCategories: string[]
-    language: string
-    query: string
-}
+export type Video = Prisma.videosGetPayload<{}>
 
 export type VideoDb = Prisma.videosCreateInput
 
