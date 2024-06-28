@@ -51,6 +51,7 @@ export default async function Gardening() {
                         <div className="number-facts-item"><AverageNumberDisplay videos={rawVideos} property="commentCount" /></div>
                     </div>
                 </div>
+                <ViewsDiagrams videos={videosForDiagram} color="green" />
                 <div className="keyfacts">
                     <h2>Other interesting numbers</h2>
                     <div className="number-facts grid grid-cols-3 gap-4 mt-4">
@@ -59,7 +60,6 @@ export default async function Gardening() {
                         <div className="number-facts-item"><AverageNumberDisplay videos={rawVideos} property="descriptioncharlength" /></div>
                     </div>
                 </div>
-                <ViewsDiagrams videos={videosForDiagram} color="green" />
                 <h2>TOP 10 TAGS</h2>
                 <p>Find out which tags are used for most of the gardening videos. Use ist as inspiration to reach a bigger crowd.</p>
                 <MultipleTags videoTags={videosForTagChart} color="green" />
