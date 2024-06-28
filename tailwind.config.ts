@@ -38,7 +38,7 @@ const config: Config = {
           content: {
             subtle: colors.gray[400],
             DEFAULT: colors.gray[500],
-            emphasis: colors.gray[700],
+            emphasis: colors.neutral[950],
             strong: colors.gray[900],
             inverted: colors.white,
           },
@@ -68,7 +68,7 @@ const config: Config = {
           content: {
             subtle: colors.gray[600],
             DEFAULT: colors.gray[500],
-            emphasis: colors.gray[200],
+            emphasis: colors.neutral[950],
             strong: colors.gray[50],
             inverted: colors.gray[950],
           },
