@@ -4,15 +4,26 @@ import { AverageNumberDisplay, NumberFact } from "./numberFact";
 import { InteractiveScatterPlot } from "~/components/scatter-plot";
 import { DurationDistribution } from "~/components/duration-distribution";
 import ViewsDiagrams from "../tremor/viewsDiagrams";
+import { MultipleTags } from "./multipleTags";
 
 export default async function Gardening() {
 
+
     const AMONT_OF_VIDEOS_FOR_DIAGRAMS = 1500
 
-    const rawVideos = await db.videos.findMany();
     const videosForDiagram = await db.videos.findMany({
         take: AMONT_OF_VIDEOS_FOR_DIAGRAMS
     })
+
+    const rawVideos = await db.videos.findMany({
+        take: 100
+    });
+    const videos = assertVideos(rawVideos);
+    const videosForTagChart = videos.map(v => ({
+        'videoId': v.videoId,
+        'tags': v.tags,
+        'clicks': v.viewCount
+      }))
 
     return (
         <div>
@@ -50,9 +61,10 @@ export default async function Gardening() {
                         <div className="number-facts-item"><AverageNumberDisplay videos={rawVideos} property="descriptioncharlength" /></div>
                     </div>
                 </div>
-                <ViewsDiagrams videos={videosForDiagram} color="green" />
-                <InteractiveScatterPlot videos={videosForDiagram} color="green" />
-                <DurationDistribution videos={videosForDiagram} color="green" />
+                <ViewsDiagrams videos={rawVideos} color="green" />
+                <MultipleTags videoTags={videosForTagChart} color="green"/>
+                <InteractiveScatterPlot videos={rawVideos} color="green" />
+                <DurationDistribution videos={rawVideos} color="green" />
                 <div className="mt-8 mb-8">
                     <h2>Top 10 videos</h2>
                     <div className="video-list grid grid-cols-2 gap-x-4 gap-y-8">

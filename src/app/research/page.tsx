@@ -6,6 +6,10 @@ import { Video } from "../data-mining/youtube/videos";
 import { EyeIcon, HandThumbUpIcon, ChatBubbleOvalLeftIcon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { WeekDayByViews } from "../gardening/weekDaybyViews";
 import toast from "react-hot-toast";
+import { VideoTable } from "./_data-table/videoDataTable";
+import { DiagramDisplay } from "../tremor/diagramDisplay";
+import ViewsDiagrams from "../tremor/viewsDiagrams";
+import { MultipleTags } from "../gardening/multipleTags";
 import { InteractiveScatterPlot } from "~/components/scatter-plot";
 import { LoadingSpinner } from "../_components/loadingSpinner";
 
@@ -80,6 +84,11 @@ function ResearchResults({ keyword }: { keyword: string }) {
     if (!videos || !videos.length) return <div>No videos found</div>
 
     const videosForDiagram = videos.filter(v => !!v.publishedAt && !!v.viewCount)
+    const videosForMultipleTags = videos.map(v => ({
+        videoId: v.videoId,
+        tags: v.tags,
+        clicks: v.viewCount
+    }));
 
     return <div>
         <div className="max-w-7xl mx-auto">
@@ -88,6 +97,7 @@ function ResearchResults({ keyword }: { keyword: string }) {
                 published: v.publishedAt!.toISOString(),
                 viewCount: v.viewCount!
             }))} />
+            <MultipleTags videoTags={videosForMultipleTags} color="gray"/>
             <InteractiveScatterPlot videos={videos} color="gray" />
         </div>
     </div>
