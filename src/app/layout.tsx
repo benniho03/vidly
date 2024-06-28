@@ -51,7 +51,7 @@ export default function RootLayout({
                     <a href="/research" className="block py-2 px-3 text-neutral-500 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-neutral-400 md:p-0 dark:text-neutral-500 md:dark:hover:text-neutral-800 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Research</a>
                   </li>
                   <li>
-                    <a href="/ai-helper" className="block py-2 px-3 text-neutral-500 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-neutral-400 md:p-0 dark:text-neutral-500 md:dark:hover:text-neutral-800 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">AI-Helper</a>
+                    <a href="/prediction" className="block py-2 px-3 text-neutral-500 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-neutral-400 md:p-0 dark:text-neutral-500 md:dark:hover:text-neutral-800 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Prediction</a>
                   </li>
                 </ul>
               </div>
