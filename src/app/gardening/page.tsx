@@ -6,6 +6,7 @@ import { NumberFact } from "./numberFact";
 import ScatterPlot, { InteractiveScatterPlot } from "~/components/scatter-plot";
 import { DurationDistribution } from "~/components/duration-distribution";
 import ViewsDiagrams from "../tremor/viewsDiagrams";
+import { MultipleTags } from "./multipleTags";
 
 export default async function Gardening() {
 
@@ -13,6 +14,11 @@ export default async function Gardening() {
         take: 100
     });
     const videos = assertVideos(rawVideos);
+    const videosForTagChart = videos.map(v => ({
+        'videoId': v.videoId,
+        'tags': v.tags,
+        'clicks': v.viewCount
+      }))
 
     return (
         <div>
@@ -54,6 +60,7 @@ export default async function Gardening() {
                     </div>
                 </div>
                 <ViewsDiagrams videos={rawVideos} color="green" />
+                <MultipleTags videoTags={videosForTagChart} color="green"/>
                 <InteractiveScatterPlot videos={rawVideos} color="green" />
                 <DurationDistribution videos={rawVideos} color="green" />
                 <div className="mt-8 mb-8">

@@ -97,7 +97,7 @@ function ResearchResults({ keyword }: { keyword: string }) {
                 published: v.publishedAt!.toISOString(),
                 viewCount: v.viewCount!
             }))} />
-            <MultipleTags videoTags={videosForMultipleTags}/>
+            <MultipleTags videoTags={videosForMultipleTags} color="gray"/>
             <InteractiveScatterPlot videos={videos} color="gray" />
         </div>
     </div>
