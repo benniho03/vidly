@@ -84,8 +84,9 @@ export async function GET(req: NextRequest) {
     }
 }
 
-export async function createVideosV2(videos: Video[]) {
-    return
+
+async function createVideosV2(videos: Video[]) {
+    return new Response("Hello World", { status: 200 })
     for (const video of videos) {
         const found = await db.videos_v2.findFirst({
             where: {
