@@ -14,8 +14,8 @@ type channelData = {
     madeforkids: string
 }
 
-// await getVideoChannelId() // uncomment to run
-console.log("Uncomment to run getVideoChannelId")
+await getVideoChannelId() // uncomment to run
+// console.log("Uncomment to run getVideoChannelId")
 
 async function getVideoChannelId() {
 
@@ -71,36 +71,43 @@ async function getVideoChannelId() {
 
 export async function createChannelData(channelIds: string[]) {
 
-    const channelParams = new URLSearchParams({
-        part: "snippet,statistics,status",
-        id: Array.isArray(channelIds) ? channelIds.join(",") : channelIds,
-        key: process.env.API_KEY_CHANNELS as string
-    })
+    let channels = []
 
-    const channelResponse = await fetch("https://www.googleapis.com/youtube/v3/channels?" + channelParams)
+    for (let i = 0; i < Math.ceil(channelIds.length / 50); i++) {
 
-    if (!channelResponse.ok) {
-        console.error(channelResponse.status, channelResponse.statusText)
-        // console.log(await response.text())
-        throw new Error("Failed to fetch videos",)
+
+        const channelParams = new URLSearchParams({
+            part: "snippet,statistics,status",
+            id: Array.isArray(channelIds) ? channelIds.join(",") : channelIds,
+            key: process.env.API_KEY_CHANNELS as string
+        })
+
+        const channelResponse = await fetch("https://www.googleapis.com/youtube/v3/channels?" + channelParams)
+
+        if (!channelResponse.ok) {
+            console.error(channelResponse.status, channelResponse.statusText)
+            // console.log(await response.text())
+            throw new Error("Failed to fetch videos",)
+        }
+
+        const data = await channelResponse.json()
+
+        const channelData = data.items.map((item: any) => ({
+            id: item.id,
+            title: item.snippet.title ?? null,
+            thumbnail: item.snippet.thumbnails.default.url ?? null,
+            description: item.snippet.description ?? null,
+            publishedAt: item.snippet.publishedAt ?? null,
+            country: item.snippet.country ?? null,
+            viewCount: Number(item.statistics.viewCount) ?? null,
+            subscriberCount: Number(item.statistics.subscriberCount) ?? null,
+            videoCount: Number(item.statistics.videoCount) ?? null,
+            madeforkids: JSON.stringify(item.status.madeForKids) ?? null
+        }))
+        channels.push(...channelData)
     }
 
-    const data = await channelResponse.json()
-
-    const channelData = data.items.map((item: any) => ({
-        id: item.id,
-        title: item.snippet.title ?? null,
-        thumbnail: item.snippet.thumbnails.default.url ?? null,
-        description: item.snippet.description ?? null,
-        publishedAt: item.snippet.publishedAt ?? null,
-        country: item.snippet.country ?? null,
-        viewCount: Number(item.statistics.viewCount) ?? null,
-        subscriberCount: Number(item.statistics.subscriberCount) ?? null,
-        videoCount: Number(item.statistics.videoCount) ?? null,
-        madeforkids: JSON.stringify(item.status.madeForKids) ?? null
-    }))
-
-    for (const channel of channelData) {
+    for (const channel of channels) {
         const currentChannel = await db.channels.findFirst({
             where: {
                 id: {

@@ -2,6 +2,7 @@ import { type Color } from '@tremor/react';
 import { BarChart } from '@tremor/react';
 import { db } from '~/server/db';
 import { Video } from '../data-mining/youtube/videos';
+import { formatNumber } from '~/lib/utils';
 
 type ViewsPerWeekday = {
     "viewCount": number | null,
@@ -120,6 +121,7 @@ export default function ViewsPerWeekday({ videos, color }: { videos: Video[], co
             yAxisLabel="Average viewcount"
             showLegend={false}
             color={"sky"}
+            valueFormatter={v => formatNumber(v).toString()}
         />
     </>;
 }

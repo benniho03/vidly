@@ -6,7 +6,6 @@ import { Video } from "../data-mining/youtube/videos";
 import { EyeIcon, HandThumbUpIcon, ChatBubbleOvalLeftIcon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { WeekDayByViews } from "../gardening/weekDaybyViews";
 import toast from "react-hot-toast";
-import { VideoTable } from "./_data-table/videoDataTable";
 import { DiagramDisplay } from "../tremor/diagramDisplay";
 import ViewsDiagrams from "../tremor/viewsDiagrams";
 import { MultipleTags } from "../gardening/multipleTags";
@@ -26,7 +25,9 @@ export default function ResearchPage() {
                 <div className="background mb-20">
                     <div className="background-bg bg-neutral-700"></div>
                     <h1>RESEARCH</h1>
-                    <p>Welcome to our research page. With our search functions you have the possibility to search for a topic of your choice. Existing YouTube videos will then be displayed. But also when is the perfect time to upload a video with your search term so that it reaches as many users on YouTube as possible.</p>
+                    <p>Welcome to our research page.
+                        With our search functionality you have the possibility to search for a topic of your choice.
+                        We will look for videos about that topic and show you the information. Find out when to upload your video or how long your videos should be for ultimate success.</p>
                     <button type="button" className="text-white bg-gray-950 hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-950 dark:hover:bg-gray-800 dark:focus:ring-gray-700 dark:border-gray-700">more</button>
                     <div className="pictures flex space-x-4">
 
@@ -39,12 +40,12 @@ export default function ResearchPage() {
 
                     </div>
                 </div>
-                <div className="searchform">
+                <div className="searchform mb-5">
                     <h2>Search for your favorite topic</h2>
                     <p className="mb-8">Enter a search term of your choice and view the results.</p>
                     <form
                         action={updateKeyword}
-                        className="mx-auto flex items-center justify-center gap-2 my-3"
+                        className="mx-auto flex items-center justify-center gap-2 my-3 mb-6"
                     >
                         <input type="text" name="keyword" placeholder="Type your keyword" className="text-neutral-900 w-full px-2 py-4 text-2xl" />
                         <button
@@ -92,34 +93,65 @@ function ResearchResults({ keyword }: { keyword: string }) {
 
     return <div>
         <div className="max-w-7xl mx-auto">
-            <VideoList videos={videos} />
-            <WeekDayByViews videos={videosForDiagram.map(v => ({
-                published: v.publishedAt!.toISOString(),
-                viewCount: v.viewCount!
-            }))} />
-            <MultipleTags videoTags={videosForMultipleTags} color="gray"/>
-            <InteractiveScatterPlot videos={videos} color="gray" />
+            <div className="mb-5">
+                <h2>TOP VIDEOS</h2>
+                <p className="mb-3">
+                    What are the top videos for the searchterm "{keyword}"? Take a look at what other creators are being successful with and find new ideas for your videos.
+                    You can navigate the pages via the buttons below.
+                </p>
+                <VideoList videos={videos} />
+            </div>
+            <div className="mb-5">
+                <h2>BEST UPLOAD TIMES</h2>
+                <p className="mb-3">
+                    Want to find out what time is best for uploading your video.
+                    With the dropdown you can toggle between different views.
+                </p>
+                <WeekDayByViews videos={videosForDiagram.map(v => ({
+                    published: v.publishedAt!.toISOString(),
+                    viewCount: v.viewCount!
+                }))}
+                    color="gray"
+                />
+            </div>
+            <div className="mb-5">
+                <h2>MOST USED TAGS FOR "{keyword}"</h2>
+                <p className="mb-3">
+                    Here you can see the most used tags for the searchterm "{keyword}".
+                    This can help you to find out which tags are popular and which tags you should use for your video.
+                </p>
+                <MultipleTags videoTags={videosForMultipleTags} color="gray" />
+            </div>
+            <div className="mb-5">
+                <h2>INTERACTIVE SCATTER PLOT</h2>
+                <p className="mb-3">
+                    Use our scatter plot to find correlations between the view count, the like count, the comment count and duration. Optimize the length of your videos to achieve your goals!
+                </p>
+                <InteractiveScatterPlot videos={videos} color="gray" />
+            </div>
         </div>
     </div>
 }
 
 function VideoList({ videos }: { videos: Video[] }) {
     const PAGE_SIZE = 10
-    const [page, setPage] = useState(1)
+    const [page, setPage] = useState(0)
 
     const videoPage = [...videos].splice(page * PAGE_SIZE, PAGE_SIZE)
 
-    if (!videoPage.length) return <div className=" flex flex-col items-center">
+    if (!videoPage.length) return <div className="flex flex-col items-center">
         <p className="text-center">That's all</p>
-        <button onClick={() => setPage(1)}>Back to the beginning</button>
+        <button className="px-2 py-3 bg-neutral-700 text-neutral-50 rounded" onClick={() => setPage(1)}>Back to the beginning</button>
     </div>
 
-    return <div className="flex flex-col gap-3">
-        {videoPage.map(video => <VideoDisplay video={video} />)}
-        <div className="flex gap-4 mx-auto">
-            <button onClick={() => setPage(page - 1)}>Previous</button>
-            <span>Page {page}</span>
-            <button onClick={() => setPage(page + 1)}>Next</button>
+    return <div>
+        <div className="grid grid-cols-2 gap-3 mb-5">
+            {videoPage.map(video => <VideoDisplay video={video} />)}
+        </div>
+        <div className="flex gap-4 mx-auto w-full justify-center items-center">
+            <button onClick={() => setPage(page - 1)} className="px-2 py-3 bg-neutral-700 text-neutral-50 rounded mt-0">Previous</button>
+            <span>{page + 1} / 10</span>
+            <button onClick={() => setPage(page + 1)} disabled={page + 1 >= videos.length / PAGE_SIZE} className="px-2 py-3 bg-neutral-700 text-neutral-50 rounded mt-0">Next</button>
         </div>
     </div>
 }
