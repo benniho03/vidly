@@ -1,11 +1,12 @@
 "use client"
 import { Video } from "~/app/data-mining/youtube/videos"
-import { BarChart } from "@tremor/react"
+import { BarChart, Color } from "@tremor/react"
 import { useState } from "react"
+import { formatNumber } from "~/lib/utils"
 
 type DateOptions = "years" | "year" | "month" | "week" | "day"
 
-export function WeekDayByViews({ videos }: { videos: { published: string | null, viewCount: number | null }[] }) {
+export function WeekDayByViews({ videos, color }: { videos: { published: string | null, viewCount: number | null }[], color: Color }) {
 
     const [dateType, setDateType] = useState<DateOptions>("day")
 
@@ -17,10 +18,10 @@ export function WeekDayByViews({ videos }: { videos: { published: string | null,
             onChange={e => setDateType(e.target.value as DateOptions)}
             className="text-neutral-950"
         >
-            <option className="text-neutral-900" value="day">Day</option>
-            <option className="text-neutral-900" value="month">Month</option>
-            <option className="text-neutral-900" value="year">Year</option>
-            <option className="text-neutral-900" value="years">Years</option>
+            <option className="text-neutral-900" value="day">Hours of the Day</option>
+            <option className="text-neutral-900" value="month">Days of the Month</option>
+            <option className="text-neutral-900" value="year">Months of the Year</option>
+            <option className="text-neutral-900" value="years">Different Years</option>
         </select>
         <BarChart
             index="date"
@@ -28,8 +29,20 @@ export function WeekDayByViews({ videos }: { videos: { published: string | null,
             categories={["viewCount"]}
             yAxisLabel="Average views"
             yAxisWidth={50}
+            xAxisLabel={getXAxisLabel(dateType)}
+            colors={[color]}
+            valueFormatter={v => formatNumber(v).toString()}
         />
     </div>
+
+    function getXAxisLabel(dateType: DateOptions) {
+        if (dateType === "years") return "Year"
+        if (dateType === "year") return "Month"
+        if (dateType === "month") return "Day"
+        if (dateType === "week") return "Week"
+        return "Hour"
+
+    }
 
 }
 

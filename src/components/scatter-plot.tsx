@@ -2,9 +2,9 @@
 import { ScatterChart, Card, type Color } from "@tremor/react";
 import { useState } from "react";
 import { Video } from "~/app/data-mining/youtube/videos";
+import { formatNumber } from "~/lib/utils";
 
 export default function ScatterPlot({ videos, xAxis, yAxis, color }: { videos: Video[], xAxis: keyof Video, yAxis: keyof Video, color: Color }) {
-
 
     return (
         <div>
@@ -15,17 +15,27 @@ export default function ScatterPlot({ videos, xAxis, yAxis, color }: { videos: V
                 category="title"
                 x={xAxis}
                 y={yAxis}
-                xAxisLabel={xAxis}
-                yAxisLabel={yAxis}
+                xAxisLabel={getLabels(xAxis)}
+                yAxisLabel={getLabels(yAxis)}
                 showOpacity={true}
                 minYValue={60}
                 enableLegendSlider
                 colors={[color]}
                 showLegend={false}
+                valueFormatter={{
+                    x: (v) => formatNumber(v).toString(),
+                    y: (v) => formatNumber(v).toString()
+                }}
             />
         </div>
     );
 
+    function getLabels(label: keyof Video) {
+        if (label === "viewCount") return "View Count"
+        if (label === "likeCount") return "Like Count"
+        if (label === "commentCount") return "Comment Count"
+        return "Duration in seconds"
+    }
 }
 
 export function InteractiveScatterPlot({ videos, color }: { videos: Video[], color: Color }) {
@@ -34,7 +44,7 @@ export function InteractiveScatterPlot({ videos, color }: { videos: Video[], col
 
     return (
         <div className="mx-auto">
-            <div className="flex justify-center gap-4 mx-auto">
+            <div className="flex justify-start gap-4 mx-auto">
                 <select
                     value={xAxis}
                     onChange={e => setXAxis(e.target.value)}

@@ -2,6 +2,7 @@ import { type Color } from '@tremor/react';
 import { BarChart } from '@tremor/react';
 import { db } from '~/server/db';
 import { Video } from '../data-mining/youtube/videos';
+import { formatNumber } from '~/lib/utils';
 
 type ViewsPerMonth = {
     "viewCount": number | null,
@@ -172,6 +173,7 @@ export default function ViewsPerMonth({ videos, color }: { videos: Video[], colo
             xAxisLabel="Month"
             yAxisLabel="Average viewcount"
             showLegend={false}
+            valueFormatter={v => formatNumber(v).toString()}
         />
     </>;
 }

@@ -2,6 +2,7 @@ import { Card, Color } from '@tremor/react';
 import { BarChart } from '@tremor/react';
 import { db } from '~/server/db';
 import { Video } from '../data-mining/youtube/videos';
+import { formatNumber } from '~/lib/utils';
 
 type ViewsPerHour = {
     "viewCount": number | null,
@@ -304,6 +305,7 @@ export default function ViewsPerHour({ videos, color }: { videos: Video[], color
             xAxisLabel="Hour"
             yAxisLabel="Average viewcount"
             showLegend={false}
+            valueFormatter={v => formatNumber(v).toString()}
         />
     </>;
 }
