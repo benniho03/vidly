@@ -12,6 +12,7 @@ export const dynamic = 'force-dynamic'
 
 export async function GET(req: NextRequest) {
 
+    const t = req.headers
     return new Response("Hello World", { status: 200 })
 
     try {
