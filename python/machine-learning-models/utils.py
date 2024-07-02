@@ -1,5 +1,5 @@
-import pandas as pd
-from sklearn.decomposition import PCA
+import pandas as pd # type: ignore
+from sklearn.decomposition import PCA # type: ignore
 
 def preprocess_data(videos):
     videos['publishedAt'] = pd.to_datetime(videos['publishedAt'])

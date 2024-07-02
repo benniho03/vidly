@@ -80,7 +80,7 @@ export function MachineLearningForm() {
         const res = await fetch("/api/ki-helper/" + handle)
         const data = await res.json()
         const { viewCount, subscriberCount, videoCount } = data
-        const machineLearningResponse = await fetch("http://localhost:5000", {
+        const machineLearningResponse = await fetch("https://datascience.kistner-it.de/", {
             method: "POST",
             body: JSON.stringify({
                 title,
@@ -95,7 +95,6 @@ export function MachineLearningForm() {
             }),
         })
         const mlData = await machineLearningResponse.json()
-        console.log(mlData)
         setResult({
             probability: Math.floor(mlData.probability * 100),
             comments: Math.floor(mlData.predictedComments),
@@ -124,16 +123,16 @@ function Result({ result, isLoading, title, handle }: { result: MLResults | null
                 <p className='mt-0'>{formatNumber(result.probability)}%</p>
             </div>
             <div className="flex gap-2 justify-center items-center">
-                <ChatBubbleLeftIcon className='w-8 h-8' />
-                <p className='mt-0'>{formatNumber(result.comments)}</p>
+                <EyeIcon className='w-8 h-8' />
+                <p className='mt-0'>{formatNumber(result.views)}</p>
             </div>
             <div className="flex gap-2 justify-center items-center">
                 <HandThumbUpIcon className='w-8 h-8' />
                 <p className='mt-0'>{formatNumber(result.likes)}</p>
             </div>
             <div className="flex gap-2 justify-center items-center">
-                <EyeIcon className='w-8 h-8' />
-                <p className='mt-0'>{formatNumber(result.views)}</p>
+                <ChatBubbleLeftIcon className='w-8 h-8' />
+                <p className='mt-0'>{formatNumber(result.comments)}</p>
             </div>
         </div>
     </>
