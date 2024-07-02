@@ -4,10 +4,10 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 from linear_regression import linear_regression
 from random_forest_regressor import random_forest_regression
-import pandas as pd
+import pandas as pd # type: ignore
 from connect import get_all_videos_ml
 from utils import preprocess_input, preprocess_data, remove_outliers
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split # type: ignore
 
 def machine_learning_script(title, description, duration, month, weekday, hour, totalChannelViews, subscriberCount, videoCount):
     videos = get_all_videos_ml()
