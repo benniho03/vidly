@@ -58,16 +58,8 @@ def preprocess_data(df):
 def create_and_train_model(X_train, y_train):
     model = Sequential()
     model.add(Dense(256, input_dim=X_train.shape[1], activation='relu'))
-    model.add(Dense(32, activation='relu'))
     model.add(Dense(64, activation='relu'))
     model.add(Dense(64, activation='relu'))
-    model.add(Dense(64, activation='relu'))
-    model.add(Dense(64, activation='relu'))
-    model.add(Dense(64, activation='relu'))
-    model.add(Dense(64, activation='relu'))
-    model.add(Dense(64, activation='relu'))
-    model.add(Dense(64, activation='relu'))
-    model.add(Dense(32, activation='relu'))
     model.add(Dense(1, activation='linear'))
     
     model.compile(optimizer='adam', loss='mean_squared_error')
